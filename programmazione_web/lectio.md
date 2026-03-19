@@ -80,4 +80,117 @@ Sono ciò che rende diverso un file web con un cazzo di foglio di carta, si può
 - *indirizzo* è la coda;
 - *href* definisce l'indirizzo a cui recarsi una volta premuto il link.
 
-Da un po' di tempo html può avere come href anche i protocolli, tipo le mail.
+L'indirizzo non per forza è un altro file *html*, può anche trattarsi di immagini, documenti, pdf, tutti aperti nel browser, oppure file compressi, che richiedono un download prima di poterli visualizzare; da un po' di tempo html può avere come href anche i protocolli, tipo le mail.
+
+##### Esempi
+```html
+<a href "destinazione.html"> clicca qui</a>
+
+<a href "nome_immagine.jpg"> clicca qui</a>
+
+<a href=mailto:studente@studenti.unimi.it> mandami un'email a </a>
+
+```
+### Percorsi dei link
+
+Chiaramente bisogna indicare il percorso che porta al file a cui si vuole arrivaredal link, di base è abbastanza comodo perchè non bisogna specificarlo se esso si trova nella stessa cartella del `main.html`, in generale specificare il percorso rispetto alla pagina web si chiama *percorso relativo*, mentre farlo a partire dalla cartella di base `~/`si chiama *percorso assoluto*, un po' come si tratta il cd a partire dalla cartella root.
+
+Il prof non è che si è messo a spiegare tutti i comandi per gestire i link, però con l'annidamento si può modificare il colore o font di uno specifico link, ha spiegato l'esistenza di *ancore*, che sono semplicemente dei link ipertestuali che portano a un "punto di aggancio", chiamato *ancora*, all'interno del file stesso, comodo per gestire gl indici o cose così.
+
+
+## Tabelle
+Qui non c'è molto da dire, si riporta semplicemente come si usano:
+ - `<tr> ... </tr>` serve per definire cosa viene scritto in una riga, per gestire invece il contenuto di ogni colonna della riga si usa un altro comando;
+ - `<td> ... </td>` gestisce appunto il contenuto della singola cella;
+ - `<th> ... </th>` è un *table header*, in sostanza quando si usa si crea una nuova riga, il contenuto viene messo in grassetto e centrato rispetto alla prima cella, tutto qui;
+ - `<caption> ... </caption>` invece si usa per definire appunto la descrizione della tabella stessa, esattamente come si fa in LaTeX.
+
+## Form
+
+Questi sono abbastanza importanti, come è già evidente serve per *collezionare input da utente*, basato sull'elemento `form`; specifica tanti elementi diversi.
+
+Vediamo ora di cosa si tratta:
+
+#### Elemento input
+È il più importante, il quale racchiude tutti gli attributi type più usati: text, checkbox, radio button etc, che ora si tratteranno in modo decisamente più approfondito.
+
+##### Text input
+Definisce semplicemente una riga di testo in cui scrivere, c'è la variante per inserire la password:
+```html
+<form>
+  <input type="text" name="dato1">
+  <br>
+  <input type="password" name="password">
+</form>
+
+```
+
+##### Textarea
+Questo invece definisce un vero e proprio *campo di testo*, non solo una linea, ma varie.
+```html
+<textarea name="area" rows="10" cols="10"> The cat was playing in the garden. </textarea>
+```
+Come si può notare, esso è indipendente da form, e si può inserire anche un testo all'interno della casella.
+
+##### Radio button
+Questo invece va all'interno del "form", consiste nella selezione di solo una tra le opzioni disponibili, quindi diverso dalla "checkbox" (nota bene: si può aggiungere un attributo `checked` per indicare la scelta predefinita).
+```html
+<form>
+  <input type="radio" name="sesso" value="molto" checked> Molto <br>
+  <input type="radio" name="sesso" value="poco"> Poco <br>
+  <input type="radio" name="sesso" value="mai"> Mai
+</form>
+```
+
+##### Checkbox input
+Diciamo che d'ora in poi non ha nemmeno molto senso dire che cosa fanno tutte queste opzioni, è lapalissiano.
+```html
+<form>
+  <input type="checkbox" name="scelta1" value="#1"> Numero 1 <br>
+  <input type="checkbox" name="scelta2" value="#2"> Numero 2 <br>
+  <input type="checkbox" name="scelta3" value="#3"> Numero 3
+
+</form>
+```
+
+##### Drop-down list
+Menùù a tendina.
+```----------
+<select name="cars">
+  <option value="1"> macchina 1 </option>
+  <option value="2"> macchina 2 </option>
+  <option value="3"> macchina 3 </option>
+</select>
+```
+
+##### Submit button
+```html
+<form action="action_page.php">
+First name:<br>
+<input type="text" name="firstname" value="Mickey">
+<br>
+Last name:<br>
+<input type="text" name="lastname" value="Mouse">
+<br><br>
+<input type="submit" value="Submit">
+</form>
+```
+`<input type="submit"` quindi definisce un bottone per "sottomettere il form ad un handler", in altre parole si passano i dati ad una pagina lato server(l'handler appunto), la quale processa i dati del form; questo handler è definito, come si vede nell'esempio, dall'attributo `action`.
+
+##### Fieldset
+Questo serve solo per "racchiudere" tutti i vari campi del form in un riquadro:
+```html
+<fieldset>
+<legend>Personal information:</legend>
+</fieldset>
+```
+
+#### Attributi
+
+
+Sono stati presentati, senza specificarli, degli attributi che è doveroso conoscere, quindi ora si presentano in modo esplicito.
+
+- `action`, definisce le azioni che devono essere fatte quando viene inviato il form, di solito i dati devono essere inviati ad una pagina web lato server, se però l'attirbuto viene omesso si considera di default la pagina corrente.
+- `method`, specifica l'operazione HTTP, quindi `get` o `post`, da usare per effettivamente inviare il form, *get* viene usata per invio dei cosiddetti *form passive*, che non contengono informazioni sensibili, tipo search engine query, inoltre è l'operazione di default in assenza di ulteriori istruzioni, tra l'altro i dati, dato che non sono sensibili, vengono diretamente visualizzati nell'indirizzo, ecco un esempio: `action_page.php?firstname=Mickey&lastname=Mouse`, il *get* è ottimo per picocle quantità di dati; *post* invece è utile quando i dati non devono essere visbili nell'indirizzo.
+- `name`, ogni attributo deve avere un nome, non è importante quale, però deve esserci, come abbiamo visto prima.
+

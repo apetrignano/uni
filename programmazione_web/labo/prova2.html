@@ -8,18 +8,111 @@
 
   </head>
   <body>
-    <h1> Ecco il famoso hello world </h1>
-    <h2> hello </h2>
-    Testo normale <span> messo span, è un pezzo di frase  </span> testo normale
-    <div> messo div </div>
-    altro testo
+    <h1> Lezione 1</h1>
+    <a name="uno"></a>
+    <font color="red" face="verdana">
+      <h1> Ecco il famoso hello world </h1>
+        </font>
+      <h2> hello </h2>
+      Testo normale <span> messo span, è un pezzo di frase  </span> testo normale
+      <div> messo div </div>
+      altro testo
     <p> paragrafo, ha più spazio sopra (e sotto) rispetto all'a capo standard.</p>
     <p> ciao </p>
     <p> ciao </p>
     <div> div</div>
     <div> div1</div>
 
+    <h1> Lezione 2</h1>
+    <a name="due"> anora 2 </a>.
+    <h2> Link</h2>
+    qui si parla di link ad altre <a href="sezioni/1.html"> pagine in html </a> oppure <a href="rick.jpg""> immagini </a>; inoltre si possono creare delle "ancore", che portano a delle parti della stessa pagina, stra utile per gli indici:
+    <li> <a href="#uno"> vai all'ancora 1 </a>;</li>
+    <li> <a href="#due"> <font color="yellow"> vai all'ancora 2 </font> </a>;</li>
+    <li> così invece si va ad <a href="#"> inizio pagina</a>.</li>
+
+    <h2> Tabelle </h2>
+    <table style="width:100%" border="1">
+    <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td> 67</td>
+    </tr>
+    <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+    </tr>
+    <th> Table heading</th>
+    <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>80</td>
+    </tr>
+    <caption> Tabella di esempio numero 1 </caption>
+    </table>
+  <form>
+  Campo dove inserire il primo dato <br>
+  <input type="text" name="dato1">
+  <br>
+  Campo dove inserire la password <br>
+  <input type="password" name="password">
+
+</form>
+
+
+
+    Di seguito viene presentata una textarea: <br>
+<textarea name="area" rows="10" cols="50"> The cat was playing in the garden. </textarea>
+
+<form>
+  Specificare il sesso: <br>
+  <input type="radio" name="sesso" value="molto"> Molto <br>
+  <input type="radio" name="sesso" value="poco"> Poco <br>
+  <input type="radio" name="sesso" value="mai"> Mai
+</form>
+
+
+<form>
+  Ora si presentano le opzioni come una checkbox: <br>
+  <input type="checkbox" name="scelta1" value="#1"> Numero 1 <br>
+  <input type="checkbox" name="scelta2" value="#2"> Numero 2 <br>
+  <input type="checkbox" name="scelta3" value="#3"> Numero 3
+
+</form>
+
+    Presentazione del menù a tendina: <br>
+<select name="cars">
+  <option value="1"> macchina 1 </option>
+  <option value="2"> macchina 2 </option>
+  <option value="3"> macchina 3 </option>
+</select>
   </body>
+  <form action="action_page.php">
+First name:<br>
+<input type="text" name="firstname" value="Mickey">
+<br>
+Last name:<br>
+<input type="text" name="lastname" value="Mouse">
+<br><br>
+<input type="submit" value="Submit">
+</form>
+  <form>
+    Ecco un bottone che semplicemente dà un allert all'utente <br>
+  <button type="button" onclick="alert('Hello World!')">Click Me!</button></form> 
+  <form action="action_page.php">
+
+<fieldset>
+<legend>Personal information:</legend>
+First name:<br>
+<input type="text" name="firstname" value="Mickey">
+<br>
+Last name:<br>
+<input type="text" name="lastname" value="Mouse">
+<br><br>
+<input type="submit" value="Submit">
+</fieldset>
+</form>
 
 
 </html>
