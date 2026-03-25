@@ -4,8 +4,7 @@
 **n.b:** il martedì si farà laboratorio, il giovedì teoria; inoltre il pdf 01 (reti) è assolutamente opzionale, è solo per "cultura", perchè poi sono cose che si faranno più avanti e sono importanti.
 
 
-
-# Linguaggio HTML
+# Linguagio HTML
 
 Si tratta di un linguaggio di *markup*, serve solo per mostrare in un certo modo un file di testo, quindi stuttura i documenti e vengono *interpretati*, non eseguiti. Di base il linguaggio serve per creare la "facciata" di pagine web, definire regole per visualizzazione etc.
 
@@ -194,3 +193,32 @@ Sono stati presentati, senza specificarli, degli attributi che è doveroso conos
 - `method`, specifica l'operazione HTTP, quindi `get` o `post`, da usare per effettivamente inviare il form, *get* viene usata per invio dei cosiddetti *form passive*, che non contengono informazioni sensibili, tipo search engine query, inoltre è l'operazione di default in assenza di ulteriori istruzioni, tra l'altro i dati, dato che non sono sensibili, vengono diretamente visualizzati nell'indirizzo, ecco un esempio: `action_page.php?firstname=Mickey&lastname=Mouse`, il *get* è ottimo per picocle quantità di dati; *post* invece è utile quando i dati non devono essere visbili nell'indirizzo.
 - `name`, ogni attributo deve avere un nome, non è importante quale, però deve esserci, come abbiamo visto prima.
 
+
+# Lezione 2
+
+
+# CSS
+
+Descritto in modo molto semplice, è un altro linguaggio di markup, che nello specifico si occupa esclusivamente di gestire lo stile di visualizzazione/formattazione, lasciando il compito di gestire struttura e contenuto all'HTML, secondo il principio fondamentale di dividere il più possibile il problema in tanti sottoproblemi. Chiaramente esso non si occupa solo di gestire il font ed il colore, ma la presentazione del sito a 360 gradi, inoltre con poche modifiche si cambia tutto il file, ad esempio: se ho 300 pagine del file, con html puro dovrei impostare uno sfondo per ogni pagina, con CSS è sufficiente cambiare una riga nel file `css`.
+
+## Meccanismi, costrutti e selettori
+
+Il file `.css` viene chiamato *foglio di stile*, il quale è un insieme di regole, le quali hanno tutte la stessa struttura:
+- *selettore*, dice cosa deve cambiare;
+- *blocco delle dichiarazioni*, dice come modificare l'oggetto puntato, secondo una regola precisa, si indica la proprietà ed il valore.
+
+#### esempio
+```css
+h1 {color: white; background: red}
+```
+Chiaramente `color` e `background` sono le proprietà, il resto i valori, mentre `h1` è il selettore; inoltre dall'esempio si nota che è possibile fare più dichiarazioni nello stesso blocco, a patto di separarle con `;`.
+
+### Selettori più nel dettaglio
+
+Esso è costituito da qualsiasi elemento di html, riferito spesso con tag selector anzichè i type selector; inoltre si possono creare delle *combinazioni di elementi*:
+
+- `elemento1 elemento 2: {}` seleziona tutti gli *elemento2* contenuti in *elemento1*;
+- `elemento1>elemento2: {}` seleziona tutti gli *elemento2* che hanno come padre un *elemento1*;
+- `elemento1 + elemento2: {}` seleziona tutti gli *elemento2* che hanno come padre un *elemento1*
+
+Oltre a ciò, aggiungendo subito dopo il selettore le parentesi quadre `[attributo]` vengono selezionati gli elementi di quel tipo con lo specifico attributo, in più ci sono altri dettagli sulla sintassi che però non scriverò perchè già presenti nelle slides.
