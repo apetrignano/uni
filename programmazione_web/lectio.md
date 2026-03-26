@@ -222,3 +222,129 @@ Esso è costituito da qualsiasi elemento di html, riferito spesso con tag select
 - `elemento1 + elemento2: {}` seleziona tutti gli *elemento2* che hanno come padre un *elemento1*
 
 Oltre a ciò, aggiungendo subito dopo il selettore le parentesi quadre `[attributo]` vengono selezionati gli elementi di quel tipo con lo specifico attributo, in più ci sono altri dettagli sulla sintassi che però non scriverò perchè già presenti nelle slides.
+
+### Selettori speciali
+
+Si tratta di selettori un po' più particolari, che rendono molto potente *css*, sono due:
+- Selettore `class`
+- Selettore `id`
+Essi devono essere associati ad uno stylesheet, non possono essere all'interno del file html.
+
+#### Selettore `class`
+
+Servono per non mappare un tag intero, ma solo alcuni che hanno una specifica *classe*, che non è altro che il nome di un selettore che scegliamo nome, solitamente esso descrive proprio il significato del testo, poi si vedrà un esempio, esso è preceduto da un punto fermo `.`
+
+##### Esempio
+
+``` css
+<style type="text/css">
+.testorosso {
+  font:12px Arial, Helvetica, sans-serif;
+  color: #FF0000;
+}
+</style>
+```
+Quindi questo `css` si riferisce solo ad alcuni elementi del file html che noi vogliamo sia di questo tipo, che definiremo nel "main" con il tag testorosso, di seguito viene riportato come ci definiremo ad esso nelll'*html*:
+```css
+<p class="testorosso"> ... </p>
+```
+
+#### Pseudo classi
+
+Servono per definire lo stato di un certo elemento, ad esempio `:active` per selezionare ed impostare lo stile di alcuni elementi *attivi*, ad esempio quando viene cliccato un testo con li mouse, usato tanto, ma non solo, per i link:
+
+- `:link` per pagine non visitate;
+- `:visited` per pagine visitate;
+- `:hover` quando il mouse passa sopra il link.
+
+#### Selettore `id`
+
+Essi invece identificano lo stile di un singolo elemento dentro la pagina `html`, usato solo quando c'è la certezza che un elemento compaia una singola volta e basta; il nome viene preceduto da `#`.
+
+##### Esempio
+
+```css
+<style type?"text/css">
+#testorosso {
+  font: 12px Arial, Helvetica, sans-serif;
+  color: #FF0000;
+}
+</style>
+```
+E si utilizza così:
+```css
+<p id="testorosso"> ... </p>
+```
+
+## Formattare un testo con CSS
+
+Adesso vengono elencate in modo abbastanza noioso le font family, font size, lenght, box model, border, margin, padding, flow layout, eccetera.
+
+## Definire la struttura della pagina
+
+Ora non si usa più la struttura tabella di html, bensì `css`, non si vedrà come fare con il primo strumento perchè non ha senso, quindi guardiamo direttamente il secondo:
+
+#### `main.html`
+```html
+<div id="container">
+  <div id="header"
+    <div id"navigation"></div>
+  </div>
+  <div id="sidebar"></div>
+  <div id="main"></div>
+  <div id="footer"></div>
+</div>
+```
+
+#### `stili.css`
+
+```css
+#container {
+  width:1040px;
+  margin:0 auto;
+}
+#header {
+  width:1000px;
+  height:140px;
+  background-color:#A4A875;
+  padding:10px;
+  margin:10px;
+  position:relative;
+}
+#navigation {
+  width:980px;
+  height:70px;
+  background-color:#DCDCDA;
+  margin:10px;
+  position:absolute;
+  bottom:10px;
+}
+#main {
+  width:700px;
+  height:300px;
+  float:left;
+  background-color:#47834B;
+  margin:10px;
+}
+#sidebar {
+  width:300px;
+  height:300px;
+  float:right;
+  background-color:#72C29B;
+  margin:10px;
+}
+#footer {
+  clear:both;
+  width:1000px;
+  height:70px;
+  background-color:#C4C4C4;
+  padding:10px;
+  margin:10px;
+}
+```
+Qui non si vede il risultato, però dalle slides, la 133 della lezione su `css`, è evidente che il tutto è molto più modificabile rispetto all'html puro, anche se non sembra è anche più semplice.
+
+
+# Lezione 3
+
+# Bootstrap
