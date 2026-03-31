@@ -274,8 +274,22 @@ Essi invece identificano lo stile di un singolo elemento dentro la pagina `html`
 E si utilizza così:
 ```css
 <p id="testorosso"> ... </p>
+
+
+
+
 ```
 
+# Qui va aggiuntla parte sulle box model, è una domanda da esame, stra importante ricorda!!!!
+
+## Box model
+
+Ogni elemento di html è considerata una *box*, con associati 4 valori personalizzabili:
+
+- ´margin´, "libera" un'area attorno al border;
+- ´border´, semplicemente un bordo che circonda il content ed il padding;
+- ´padding´, trasparente, "libera" un'area intorno al content;
+- ´content´, che è effettivamente il contenuto della box,dove ci sono i testi e le immagini.
 ## Formattare un testo con CSS
 
 Adesso vengono elencate in modo abbastanza noioso le font family, font size, lenght, box model, border, margin, padding, flow layout, eccetera.
@@ -347,4 +361,52 @@ Qui non si vede il risultato, però dalle slides, la 133 della lezione su `css`,
 
 # Lezione 3
 
+Non so dove aggiungere questo dettaglio, ma c'è da ricordare che il ´flex´ non si eredita più in là di un livello, quindi nella lezione precedente bisogna aggiungere la parte sull'ereditarietà, ricorda.
+
 # Bootstrap
+
+Uno dei problemi principali per quanto riguarda la creazione di pagine web è l'adattabilità al dispositivo: chiaramente non è la stessa cosa vederla dal computer e dal cellulare, le pagine che cambiano in funzione dello schermo si dicono *reattive* oppure *responsive*, e per fare ciò noi useremo *bootstrap*, che è un framework, ossia librerie che permettono di fare ciò in modo facile, si ricorda che per ora si sta parlando solo di front-end ovviamente.
+La domanda che sorge spontanea è: come si utilizza? Si può fare in due modi: scaricarlo ed usarlo oppure includerlo nel con la versione online di bs, in questo modo:
+
+Bisogna afre una considerazione doverosa: *bootstrap* è una libreria, che in teoria va a sostituire il "css puro" che si è usato la volta scorsa, stiamo andando così ad introdurre strumenti che semplificano la progettazione di una pagina web, pertanto ci si può azardare a dire che bootstrap non è un qualcosa di separato dal css, è solo un modo di usare il css in maniera semplice.
+```
+<!-- Ultimo CSS Bootstrap compilato e minimizzato -->
+<link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+```
+
+Sta roba qui si usa in modo diverso anche per javascript bootstrap.
+
+Per vedere come fare certe cose si utilizzerà tantissimo il "manuale online" di bs, che è *getbootstrap.com*
+
+Facendo come scritto sopra, si include una libreria (*css* in questo caso) con tantissime cose, il prof ha fatto vedere che sono 12.000 righe, a questo punto bisogna capire come funzionano e comne usarl) con tantissime cose, il prof ha fatto vedere che sono 12.000 righe, a questo punto bisogna capire come funzionano e comne usarle.
+
+Di seguito viene presentato come modificare la pagina con bs con i commenti:
+
+
+```css
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap demo</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-
+QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<h1>Hello, world!</h1>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-
+YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+```
+
+Bootstrap è un sistema a griglie, che consente fino a 12 colonne in una pagina, che si organizzano in modo automatico a seconda delle dimensioni dello schermo; nel caso non servano 12 griglie esser si possono "unire" per creare delle colonne più grandi: 
+```html
+<div class="col-md-6">Intervallo 6</div><div class="col-md-6">Intervallo 6</div>
+```
+Il risultato è che ci saranno due colonne, ognuna delle dimensioni di 6 colonne "standard"; quando si mette nell'html un div si applica direttamente la classe col; detto così sembra molto limitativo, tuttavia queste griglie sono estremamente personalizzabili, ad esempio innestare griglie in colonne o avere delle colonne in *offset* (hai fatto fisica sai cosa significa), la cosa importante è che la somma delle dimensioni delle colonne utilizzate sia 12.
+
+Poi ha parlato dei *breakpoint*, che sono dei valori per ora usati per la visualizzazione di colonne, ci sono 6 livelli, da xs a xxl, per ogni livello, se la pagina si trova su uno schermo con un numero di pixel orizzontalmente e/o verticalmente sotto un valore limite, le colonne non vengono più viste affiancate, bensì impilate.
+
+A questo punto il prof dice di togliere dal cv dettagli scomodi, tipo la width, etc.
