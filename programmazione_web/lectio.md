@@ -368,7 +368,7 @@ Non so dove aggiungere questo dettaglio, ma c'è da ricordare che il ´flex´ no
 Uno dei problemi principali per quanto riguarda la creazione di pagine web è l'adattabilità al dispositivo: chiaramente non è la stessa cosa vederla dal computer e dal cellulare, le pagine che cambiano in funzione dello schermo si dicono *reattive* oppure *responsive*, e per fare ciò noi useremo *bootstrap*, che è un framework, ossia librerie che permettono di fare ciò in modo facile, si ricorda che per ora si sta parlando solo di front-end ovviamente.
 La domanda che sorge spontanea è: come si utilizza? Si può fare in due modi: scaricarlo ed usarlo oppure includerlo nel con la versione online di bs, in questo modo:
 
-Bisogna afre una considerazione doverosa: *bootstrap* è una libreria, che in teoria va a sostituire il "css puro" che si è usato la volta scorsa, stiamo andando così ad introdurre strumenti che semplificano la progettazione di una pagina web, pertanto ci si può azardare a dire che bootstrap non è un qualcosa di separato dal css, è solo un modo di usare il css in maniera semplice.
+Bisogna afre una considerazione doverosa: *bootstrap* è una libreria, che in teoria va a sostituire il "css puro" che si è usato la volta scorsa, stiamo andando così ad introdurre strumenti che semplificano la progettazione di una pagina web, pertanto ci si può azzardare a dire che bootstrap non è un qualcosa di separato dal css, è solo un modo di usare il css in maniera semplice, per ora non si sta andando ad usarlo *al posto di* css, ma ad affiancarlo, poi si vedrà come praticamente tutto sarà fatto in termini di bootsrtap e non più di css.
 ```
 <!-- Ultimo CSS Bootstrap compilato e minimizzato -->
 <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -380,7 +380,7 @@ Per vedere come fare certe cose si utilizzerà tantissimo il "manuale online" di
 
 Facendo come scritto sopra, si include una libreria (*css* in questo caso) con tantissime cose, il prof ha fatto vedere che sono 12.000 righe, a questo punto bisogna capire come funzionano e comne usarl) con tantissime cose, il prof ha fatto vedere che sono 12.000 righe, a questo punto bisogna capire come funzionano e comne usarle.
 
-Di seguito viene presentato come modificare la pagina con bs con i commenti:
+Di seguito viene presentato come modificare la pagina con bs, inoltre si ricorda che in fondo , nel body, si include anche una libreria di `javascript`, per ora non si s amolto perchè, però poiù avanti si capirà, serve per usare tutte le funzionalità possibili.
 
 
 ```css
@@ -407,6 +407,67 @@ Bootstrap è un sistema a griglie, che consente fino a 12 colonne in una pagina,
 ```
 Il risultato è che ci saranno due colonne, ognuna delle dimensioni di 6 colonne "standard"; quando si mette nell'html un div si applica direttamente la classe col; detto così sembra molto limitativo, tuttavia queste griglie sono estremamente personalizzabili, ad esempio innestare griglie in colonne o avere delle colonne in *offset* (hai fatto fisica sai cosa significa), la cosa importante è che la somma delle dimensioni delle colonne utilizzate sia 12.
 
-Poi ha parlato dei *breakpoint*, che sono dei valori per ora usati per la visualizzazione di colonne, ci sono 6 livelli, da xs a xxl, per ogni livello, se la pagina si trova su uno schermo con un numero di pixel orizzontalmente e/o verticalmente sotto un valore limite, le colonne non vengono più viste affiancate, bensì impilate.
+Poi ha parlato dei *breakpoint*, che sono dei valori per ora usati per la visualizzazione di colonne, ci sono 6 livelli, da xs a xxl, per ogni livello, se la pagina si trova su uno schermo con un numero di pixel *orizzontalmente* sotto un valore limite, le colonne non vengono più viste affiancate, bensì impilate.
 
 A questo punto il prof dice di togliere dal cv dettagli scomodi, tipo la width, etc.
+
+
+# Lezione 4
+
+Associando la classe `raw` si predispone quella parte di testo anche con i padding, margin, etc; inoltre ogni classe immaginabile è in realtà una *famiglia di classi*: ad esempio: `col` occupa tutti i 12esimi disponibili, mentre `col-md-6` ne occupa la metà, ma sono la stessa classe, quindi in reltà `col` è una famiglia di classi, perchè non è solo una. Già questo però è un po' troppo manuale, più avanti si vedrà che si può gestire ciò in modo *dinamico*.
+
+Quello che si farà nella prima parte della lezione è guardare le classi disponibili con bootstrap, la regola è molto semplice: per noi sono semplicemente dei `div`, con associati una class, tutto qui.
+
+### Container
+È semplicemente un blocco base, quando si invoca l'elemento viene centrato sulla pagina, e ha diverse dimensioni possibili, in particolare quando si invoca una di queste esso avrà un certo numero di *scatti*, ad esempio: `container-md` fino a 576 px occuperà il 100% dello spazio, dopodichè, al crescere die pixel disponibili in orizzontale, ci sono degli scatti come detto prima, `container--lg` invece occupa il 100% dello spazio disponibile fino ai 678 px orizzontali, poi va a scatti c'è inoltre `container-fluid` che occupa *sempre* il 100%.
+
+
+### Colori
+
+In realtà è abbastanza semplice modificarli, hanno certi colori standard, la sintassi di base è `famiglia-colore`, ad esempio se si vuole il colore rosso, che si chiama *danger*, associato ad un bottone, di famiglia *btn*, quando si invoca il bottone si fa semplicemente: `btn-danger`, tutto qui.
+
+### Spaziatura
+
+Anche qui, basta fare `elemento-numero`, e sul sito c'è una sfilza di *elemento* che si vuole modificare, tipo la parte sinistra del testo, sia sx che dx, sopra, sotto, etc; lo spazio è un numero, che ha pochi valori specifici, che vanno da 0 a 5, oltre ad auto.
+
+
+### Text
+
+Questa cosa ha veramente poco senso da speigare, semplicemente si modifica l'allineamento del testo, lo spessore del font, il font stesso, le maiuscole, l'interlinea e tutto ciò che è possibile fare fare.
+
+
+### Altro
+
+C'è davvero tanto sul manuale, non è che bisogna stare qui a scrivere tutto.
+
+Andando più nel pratico, s esi cerca bootstrap example free si possono scaricare dei temi già fatti, ma attenzione: non è che si scarica una *struttura*, bensì è un file che va incluso nel nostro html, che poi ci permette di usare degli elementi *già personalizzati*, tutto qui, il bottone ad esempio sarà di un certo colore con magari una piccola animazione, ma non è che si scarica la pagina di esempio; questa cosa non è per niente utile ai fini del corso, però per quanto riguarda il lavoro è anche utile.
+
+
+### Accordion
+
+Sono delle specie di menù a tendina, per noi sono semplicemente dei `div` con associato `class="accordion`.
+
+
+### Cards
+
+Sono molto importanti, sono dei *blocchi predefiniti* già presenti, ogni titolo nella home di Netflix è una card ad esempio, i singoli prodotti di Amazon; se mi servono 5 *cards*, semplicemente faccio un `div class="row"` e poi dentro ci metto le mie 5 cards, non è così tanto complicato, il problema più avanti sarà come cambiare il contenuto in modo automatico: non è che gli sviluppatori di Netflix si mettano ogni giorno a modificare manualmente il codice sorgente della pagina html del sito, cambiano pochissime righe su un database, anche in modo automatico, ma si vedrà dopo.
+
+
+### Navbar
+
+Già sappiamo cos'è: è un menù con vari elementi disposti in orizzontale, anchev qui, bah, basta vedere il manuale, alla fine non sono cose che nella vita servirà sapere a memoria.
+
+
+
+
+Tutti questi elementi sono riassumibili in: `div` e `li`.
+
+
+## Importante
+
+Una volta che si è creata la pagina, abbiamo fatto un cv, e ok, però se noni vogliamo tanti cv? Bisogna fare copia-incolla mille volte? Assolutamente no: nele prossime lezioni noi arriveremo a scoprire che, come già anticipato prima, struttura e contenuto sono *completamente separati*, un designer crea la struttura, poi un altro recupera i dati da un *datbase*, in modi che per ora non sappiamo ancora, ma che vedremo.
+
+
+
+
+
