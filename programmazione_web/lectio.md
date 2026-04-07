@@ -468,6 +468,116 @@ Tutti questi elementi sono riassumibili in: `div` e `li`.
 Una volta che si è creata la pagina, abbiamo fatto un cv, e ok, però se noni vogliamo tanti cv? Bisogna fare copia-incolla mille volte? Assolutamente no: nele prossime lezioni noi arriveremo a scoprire che, come già anticipato prima, struttura e contenuto sono *completamente separati*, un designer crea la struttura, poi un altro recupera i dati da un *datbase*, in modi che per ora non sappiamo ancora, ma che vedremo.
 
 
+# Lezione 5
 
+# Javascript
+
+Oggi si introduce un concetto non trattato fino ad ora: la *dinamicità*, che significa semplicemente creare pagine che di base non hanno i dati, ma solo la struttura, che poi si adatterà al numero di dati che si vanno a pescare da un *database*.
+
+Le pagine *statiche* infatti, sono pagine il cui contenuto è "fisso", è come un foglio di carta, non aperto quindi a modifiche, mentre una *dinamica* ha il contenuto generato al momento della richiesta; bisogna anche distinguere quando questa caratteristica è *lato server* (contenuto cambia e la sua gestione dipende da una richiesta ad un server, quindi server genera pagina e manda la pagina al client) o *lato client*, dove pagina generata direttamente dal client obv, queste ultime si chiamano "pagine debolmente dinamiche".
+
+### Livelli logici
+
+Come detto prima, le applicazioni web si sviluppano su 3 livelli logici:
+
+- Presentazione, `html`, `css`;
+- Intermedio, `JavaServlet`, `php`, `JavaScript`;
+- Dati, `xml`, `json`.
+
+Chiaramente per pagine *autenticamente dinamiche* c'è bisogno di un server.
+
+Anni fa è stato introdotto `ajax`, il quale elabora una *richiesta asincrona*, alcune istruzioni possono essere eseguite in contemporanea ad altre, non è sempre necessario che finisca istruzione precedente, la cosa è particolarmente importante per noi.
+
+## Fondamenti di JavaScript
+
+È un lingauggio di scripting usato spesso client-side, il suo interprete è contenuto all'interno del browser. A differenza di html, esso è case sensitive, e basatosu due concetti principali: *document object model* (modello per cui possiamo modificare la pagina web come vogliamo) ed *orientato ad eventi*.
+
+### Tipi
+
+Si tratta di un linguaggio *debolmente tipizzato*, quindi il tipo delle variabili non va dichiarato in modo esplicito, tipo python; i tipi vengono convertiti in automatico durante l'esecuzione, quando possibile, chiaramente ciò rende la scrittura più semplice, però c'è molta più apertura ad errori (`7+a` è tecnicamente possibile); per dichiararle in genere non serve una sintassi del tipo `var variabile`, tranne nel caso in cui stiamo dichiarando variabili *locali*. I tipi principali sono:
+
+- `number`;
+- `boolean`;
+- `string`.
+
+##### Esempio
+```
+x = '3' + 2; // la stringa '32'
+{
+{ x = 5 } // blocco interno
+y = x + 3; // x denota 5, non "323"
+}
+```
+Risultato finale è 8; da ciò si capisce che nonostante si abbia definito il valore di una variabile dentro un blocco, non si ha avuto una modifica a livello locale, bensì globale, infatti per avere variabili locali si usa la keyword `let`.
+
+#### Costruzione alternativa di Array
+
+Non si fa solo nel modo che già conosciamo, si può anche elencare la sequenzaracchiusa tra parentesi quadre, con i vlaori separati dalle virgole; dato che javascript è debolmente tipizzato, gli array stessi possono anche essere non omogenei, di seguito un esempio di una dichiarazione ed inizializzazione di array generico:
+```java
+vett=[1, -2, "tre"];
+```
+
+### Scrittura in `JavaScript`
+
+Di base scrivere in questo lingauggio sembra abbastanza simile a `Java`, anche se fondamentalmente diversi: i commenti, le espressioni, le costanti, gli operatori sono quelli, c'è un'"aggiunta": con `===` oltre al valore si controlla anche il tipo. Bisogna vedere sulle slides come sono scritti i tipi, perchè è più lunga di così.
+
+Di seguito un esempio di espressione in javascript:
+```
+document.write(a/b) // viene stampato il risultato dell'operazione a / b
+```
+
+### Specifica dello script
+
+Il codice può essere incluso anche in un file `html`, attraverso il tag `<script>`, la dichiarazione delle funzioni va generalmente nel `<head>`, mentre le chiamate ad esse nel `<body>`.
+
+##### Esempio
+
+```html
+<HEAD>
+...
+  <SCRIPT language="JavaScript">
+    function lordo(netto, tara) {
+    var risultato = 0;
+    risultato = Number(netto) + Number(tara);
+    return risultato;
+  }
+  </SCRIPT>
+...
+</HEAD>
+
+
+<BODY>
+...
+  <SCRIPT language="JavaScript">
+    var netto_in = prompt("Inserire il peso netto", "");
+    var tara_in = prompt("Inserire la tara", "");
+    var ris = lordo(netto_in,tara_in);
+    document.write("<h1>Prezzo scontato:" + ris + "</h1>");
+  </SCRIPT>
+...
+</BODY>
+```
+
+Dopo ciò, alla fine del documento in html ci sarà una riga con questo valore qua, si capisce che è potente, si possono scrivere nel file html intere righe di codice all'interno di un ciclo per far cambiare la pagina web in base a determinate condizioni.
+
+##### Esempio scrittura di righe su html
+
+``` html
+<SCRIPT language="JavaScript">
+  var images = new Array();
+  images[0] = "figure1.jpg";
+  images[1] = "figure2.jpg";
+  images[2] = "figure2.jpg";
+  var i=0;
+  while (i<images.length) {
+    document.write("<p><img src='"+images[i]+"'></p>");
+    i++;
+  }
+</SCRIPT>
+```
+
+Verranno create 3 immagini alla fine del file html.
+
+## Oggetti DOM, eventi, finestre e nodi
 
 
