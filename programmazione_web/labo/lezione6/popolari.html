@@ -93,7 +93,7 @@
       var modello = document.getElementById('modello');
       var clone = modello.cloneNode(true);
       <!-- si tornano tutti gli elementi che hanno quel tag specifico in particolare noi stiamo cercando ora delle classi specifiche, tipo img, h5, p, a -->
-      clone.getElementsByTagName('img')[0].src+= film.poster_path; // non devo sostituire, devo concatenare il valore sotto l'altro
+      clone.getElementsByTagName('img')[0].src= 'https://media.themoviedb.org/t/p/w440_and_h660_face/' + film.poster_path; // non devo sostituire, devo concatenare il poster_path all'url che già dovrebbe esserci
       clone.getElementsByTagName('h5')[0].innerHTML = film.title;
       clone.getElementsByTagName('p')[0].innerHTML = film.overview;
       clone.getElementsByTagName('a')[0].href += film.id;
