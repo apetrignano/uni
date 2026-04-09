@@ -490,7 +490,7 @@ Anni fa è stato introdotto `ajax`, il quale elabora una *richiesta asincrona*, 
 
 ## Fondamenti di JavaScript
 
-È un lingauggio di scripting usato spesso client-side, il suo interprete è contenuto all'interno del browser. A differenza di html, esso è case sensitive, e basatosu due concetti principali: *document object model* (modello per cui possiamo modificare la pagina web come vogliamo) ed *orientato ad eventi*.
+È un lingauggio di scripting (quindi di programmazione, a differenza di *html*), usato spesso client-side, il suo interprete è contenuto all'interno del browser. A differenza di html, esso è case sensitive, e basatosu due concetti principali: *document object model* (modello per cui possiamo modificare la pagina web come vogliamo) ed *orientato ad eventi*.
 
 ### Tipi
 
@@ -569,7 +569,7 @@ Dopo ciò, alla fine del documento in html ci sarà una riga con questo valore q
   images[1] = "figure2.jpg";
   images[2] = "figure2.jpg";
   var i=0;
-  while (i<images.length) {
+  while (i<images.length) 
     document.write("<p><img src='"+images[i]+"'></p>");
     i++;
   }
@@ -578,6 +578,87 @@ Dopo ciò, alla fine del documento in html ci sarà una riga con questo valore q
 
 Verranno create 3 immagini alla fine del file html.
 
+# Lezione 6
+
 ## Oggetti DOM, eventi, finestre e nodi
 
+### DOM
 
+È una delle due cose che `javascript` gestisce molto bene l'altra l'abbiamo detta prima. Si tratta di uno standard W3C, abbastanza generico, per accedere ai documenti, si dice che è uno standard *ad oggetti*, con dei metodi per gestire le strutture dati, che in questo caso sono i documenti stessii stessi;; è separato in tre parti, ognuno uno standard per la gestione di un tipo di documento:
+
+- Core DOM,   è il modello std per tutti i tipi di documenti, anche word o pdf;
+- XML DOM, per i documenti XML;
+- HTML DOM, chiaramente per i documenti HTML.
+
+In generale, ogni tag della pagina è un oggetto, il quale ha determinati metodi per la stessa classe, il tag `<p>` è un oggetto ad esempio, che potrà essere manipolato con i metodi per quell'oggetto lì.
+
+JavaScript è composto di due parti: il *core*, comune a tutti i browser, ed il *DOM*, che è come detto prima un insieme di oggetti predefiniti che si riferiscono alla pagina web, ciò è diverso per ogni browser.
+
+La pagina è erappresentato come un albero: c'è una radice, che ha un nodo, ed ogni nodo piò avere altri "figli", ad esempio, un'enciclopedia ha sezioni, le quali hanno i capitoli, che hanno a loro volta i paragrafi, questi i sottoparagrafi, questi le frasi, poi le parole, poi le lettere; due paragrafi sono *fratelli* se sono generati dallo stesso padre.
+
+Tramite il modello DOM, js può cambiare gli elementi ed attributi di una pagine html, gli stili css, rimuovere o aggiungere attributi ed elementi, reagire ad eventi della pagina e creare nuovi eventi;  esso è organizzato secondo una gerarchia, da `window` ci sono altre robe, che a loro volta hanno altre robe (nelle slides da pagina 65 ci sono tutti gli schemi e le immagini necessarie), si può dire che quindi window è la *radice* della gerarchia DOM.
+
+
+- window: è la finestra corrente del browser, la base di partenza per tutto, che ha tanti figli;
+- navigator, è il browser, per sapere quale browser si sta effettivamente utilizzando;
+- document, è il contenuto della finestra, che a noi importa (questa ha un sacco di figli);
+- location, ci da informazioni sull'URL corrente;
+- history, è l'elenco degli URL visitati di recente.
+
+Un esempio di ciò: quando evidenzio qualcosa in un file pdf e faccio tasto destro, mi si apre un *menù degli eventi*, che sono i metodi dell'oggetto che ho evidenziato.
+
+Il metodo principale che useremo nella nostra carriera accademica del corso è il metodo `write`, il quale stampa un valore a video (lo abbiamo già visto ieri).
+
+##### Esempio più pratico
+
+```javascript
+titolo[0] = "film1";
+titolo[1] = "film2";
+titolo[2] = "film3";
+
+locandina[0] = "img1.jpg";
+locandina[1] = "img2.jpg";
+locandina[2] = "img3.jpg";
+
+for(i = 0; i < titolo.length; i++) {
+  document.write('<div class="col">' + titolo[i]);
+  document.write('<img src="' + locandina[i] + '">');
+  document.write('</div>');
+}
+```
+
+Si vede quante cazzo di cose si possono fare: per come abbiamo fatto lo script siamo completamente indipendenti dal numero di elementi, essi non compaiono nel ciclo for.
+
+#### Proprietà e funzioni degli oggetti
+
+È una collezione di 
+
+1. proprietà (le variabili, a loro volta oggetti);
+1. funzioni (i metodi).
+
+Per gli esempi si rimanda alle slides da pagina 73.
+
+Per accedere agli ogetti della pagina, come visto nella prima lezione, è possibile farlo in maniera molto semplice tramite il `name`, di seguito un esempio:
+
+```html
+<form name="myform">
+  <input type="text" name="cognome" size=20>
+  <input type="button" name="bottone" value="Show" onClick="alert(document.myform.cognome.value)">
+</form>
+```
+
+Tuttavia il modo è usare il metodo apposito: `getElementById(idname`, il quale ritorna l'id dell'elemento oppure `null` se esso non esiste.
+
+##### Esempio
+
+```html
+<INPUT TYPE="text" ID="codice_fiscale">
+```
+
+```javascript
+window.document.getElementById("codice_fiscale").value=...
+```
+
+
+
+Sta facendo laboratorio, ma non ci sto capendo una sega, non per chissà che, ma non ha spiegato nulla, fanculo.
