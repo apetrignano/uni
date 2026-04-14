@@ -662,3 +662,93 @@ window.document.getElementById("codice_fiscale").value=...
 
 
 Sta facendo laboratorio, ma non ci sto capendo una sega, non per chissà che, ma non ha spiegato nulla, fanculo.
+
+
+
+# Lezione 7
+
+<u>n.b.</u> Le cose trattare nell'ultima parte della scorsa lezione, che non avevo molto capito come si intuisce dall'ultima frase scritta, sono presenti nelle slides della lezione `05 javascript`, a partire da `pag 74`.
+
+# Eventi
+
+Si dice hce javascript è *event-driven*, perchè è fatto abbastanza per questo, ma che cosa si intende? È abbastanza semplice, significa semplicemente che reagisce alle azioni dell'utente: un evento è ad esempio l'utente che clicca su un link, o su un bottone, in modo ancora più "granulare": l'evento è non solo il tasto che si schiaccia, ma "il tasto si schiaccia" ed "il tasto si rilascia".
+
+##### Esempio
+
+`<a href="#" onClick="window.print()">`
+
+L'attributo `onClick` è un attributo, il quale dice che l'evento click innesca il gestore degli eventi (un modo molto pomposo per definire il pezzetto di codice che si occupa di fare qualcosa quando accade l'evento), `window.print()` è un codice che viene eseguito dal gestore, mentre `href` è banale, l'unica cosa che non si è detto è che quando si scrive # si "salta" in cima alla pagina, tutto qui, per evitare che si ritorni al top si può fare così: `<A HREF="#" onClick="JavaScript:window.print(); return false;">`. Questi eventi sono parte del `DOM`, che scatena in ultima istanza del codice JavaScript.
+
+##### Esempio 2
+
+```html
+<FORM name="myform">
+  <INPUT type="text" name="campoDiTesto" size=30 maxlength=30 value="Scrivere qui">
+      <P>
+  <INPUT type="button" name="bottone" value="Premi qui">
+</FORM>
+```
+
+Alla fine quando il bottone viene premuto si può invocare una funzione javascript.
+
+### Gestione finestre
+
+ Ovviamente è necessario gestire l'oggetto `window`, elencare tutte le proprietà o come va usato non ha senso, dato che è tutto sulle slides.
+
+
+### Nodi
+
+Ogni oggetto, secondo DOM, è un *nodo*, ed ognuno è relazionato in qualche modo con gli altri; si possono "scorrere", con proprietà tipo: `parentNode`, `childNodes[number]`, `lastChild` etc.
+
+
+# XML e JSON
+
+In genere queste due cose vengono usate nel cosiddetto *programmable web*, per la generazione di contenuti dinamici; sono lo standard per praticamente tutte le infrastrutture in Italia.
+ `xml` non è una roba così tanto strana: è un linguaggio di *markup*, progettato per descrivere dati, la principale particolarità è che, a differenza di html, *i tag non sono definiti*.
+
+Un'altra cosa importante da capire è che *xml non fa niente*, è progettato solo per strutturare, memorizzare e trasmettere dati: una volta scritto il codice xml bisognerà scrivere del software per spedire e/o riceverli. Perciò non si sostituisce ad html, lo scopo è *rappresentare i dati con xml, poi mostrarli con html*. Nel corso non si userà, però è ampiamente usato, noi useremo `json`.
+
+##### Esempio
+
+```xml
+<?xml version=“1.0” encoding=“ISO-8859-1”?>
+<nota>
+  <a>Gianni</a>
+   <da>Monica</da>
+   <titolo>Promemoria</titolo>
+   <corpo>Ricordati di passare a prendermi domani</corpo>
+</nota>
+```
+
+
+# json
+
+La prima cosa da dire è che *non è uno standard*, è un cosiddetto *standard de facto*, non esiste il DOM dei `json`. Quello che interessa a noi è che d'ora in avanti noi avremo due programmi, che comunicano tra di loro: uno gestisce i dati, gestisce i dati, fa cose, li elaboraa, un altro li mostra.
+
+#### Sintassi
+
+I dati sono coppie nome/valore, ogni oggetto è racchiuso da parentesi graffe, l'"assegnamento" di un valore ad un nome avviene tramite `:`, le coppie sono separate da una semplice virgola `,`, infine le parentesi quadre `[]` definiscono l'array, ed ogni elemento è separato ancora dalla virgola.
+
+##### Esempio
+
+```json
+{
+  "book": [
+  {
+    "id":"01",
+    "language": "Java",
+    "edition": "third",
+    "author": "Herbert Schildt"
+  },
+  {
+    "id":"07",
+    "language": "C++",
+    "edition": "second"
+    "author": "E.Balagurusamy"
+  }]
+}
+```
+
+#### Datatype
+
+Json ha pochi tipi di dato, sono 8, e la loro descrizione è presente a pagina 69in `06 XML_JSON.pdf`.
