@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+  <h1>Popolari</h1>
+
+  <div class="container">
+    <div class="row">
+      <label for="range3" class="form-label"> </label>
+      <input type="number" id="page" min="1" max="5" step="1" value="1" onchange="mostraPopolari()">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col d-none" id="modello">
+      <div class="card" style="width: 18rem;">
+        <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text"></p>
+          <a href="scheda_film.html?id=" class="btn btn-primary">Scheda Film</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script>
+    // fai una fetch a : url 
+    // converti il ritorno da json a variabile js
+    // assegnare il risultato alla var popolari
+
+
+    lang = it-IT;
+
+    function pulisciDiv() {}; // da implementare
+    function mostraPopolari() { // no non ho capito da questo punto in poi, manca qualcosa, da ricostruire
+      var page = document.getElementById('page').value;
+
+      fetch('https://api.themoviedb.org/3/movie/popular?page='+page'&lang='+lang+'&api_key=0a445616bb0263bfbe8d3c1e4db72fc8')
+
+        .then(response => response.json())
+        .then(popolari => { // importantissimo, se non includo il ciclo for dentro il .then il browser fa il ciclo PRIMA di assegnare result a popolari, quindi incasina tutto
+
+          var modello = document.getElementById('modello');
+          for (let i = 0; i < popolari.results.length; i++) {
+            var film = popolari.results[i];
+
+            var clone = modello.cloneNode(true);
+            clone.getElementsByTagName('img')[0].src += film.poster_path;
+            clone.getElementsByTagName('h5')[0].innerHTML = film.title;
+            clone.getElementsByTagName('p')[0].innerHTML = film.overview;
+            clone.getElementsByTagName('a')[0].href += film.id+"lang="+lang;
+            clone.classList.remove('d-none');
+            clone.id = i;
+            modello.before(clone);
+          }
+        });
+    };
+    mostraPopolari();
+
+    // cosa viene richiesto: per ora mettere la possibilità di scegliere la lingua e la pagina, in modo statico
+
+  </script>
+
+</body>
+
+</html>
