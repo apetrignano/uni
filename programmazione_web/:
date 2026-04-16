@@ -765,7 +765,7 @@ Per fare richiesta di dati serve una `API key`,
 Di seguito viene mostrata la sintassi di più o meno ogni richiesta che si vede negli url delle pagine web, per ogni valore.
 
 ```
-url?parametro1=valore&parametro2=valore&parametro3=valore
+uri ?parametro1=valore&parametro2=valore&parametro3=valore
 ```
 
 
@@ -788,52 +788,9 @@ Poi non è che facciamo coincidere il nostro backend con quello di tmdb in quest
 
 Si parla di ciò quando si metttono in relazione il codice *produttore* e *consumatore*, quindi semplicemente a noi interessa quando facciamo una richiesta al nostro bellissimo tmdb; di seguito lo header della richiesta:
 
-``` javascript
+
+``` javascripta
 let promise = newPromise(function(resolve, reject) {
   // codice produttore
 });
 ```
-
-L'oggetto creato ha delle proprietà: `state` e `result`.
-
-Invece `fetch` è un metodo, è il più moderno e versatile.
-
-##### Sintassi di Base
-
-```javascript
-var promise = fetch(url, [options])
-```
-
-- senza alcuna option la richiesta diventa una semplice `get`.
-
-Ottenere una risposta consta di due fasi: *valutazione dello stato* e *risposta*.
-
-### Valutazione dello stato
-
-`HTTP` ha uno status, con delle proprietà, l'ok è un numero tra 200 e 299, si parte dal 100 (famiglia dei 100) e si arriva al 599.
-
-##### Esempio
-
-```javascript
-let response = await fetch(url);
-  if (response.ok) { // se l'HTTP-status è 200-299
-    var json = await response.json(); // così si ha conversione da json (illegibile) ad una variabile javascript (leggibile)
-  } else {
-  alert("HTTP-Error: " + response.status);
-}
-```
- - `await` serve perchè quando ci sono più processi in contemporanea ogni istruzione "attende".
-
-#### Per i nostri progetti
-
-Di base semplicemente "si toglie" la parte dei contenuti, che viene gestita da `<script>`; quindi nella struttura si tolgono le scritte dai div banalmente.
-
-Prossimi steps:
-
-- chiedere i dati con fetch;
-- gestire la risposta e convertire json in js;
-- estrarre dati da variabile;
-- modificare 
-
-
-Se i dati sono diversi, l'url è diverso ed obv bisogna fare due fetch; a volte sono legati, nel senso che un dato del secondo url sarà parte del primo, questa cosa semplicemente si fa con DOM, molto semplicemente.
