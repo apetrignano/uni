@@ -89,7 +89,7 @@
     } */
 
      for(let i = 0; i < popolari.results.length; i++) {
-      var film = popolari.results[i];
+      var film = popolari.results[i]; // crea una variabile che ha come valore tutti gli attributi del risultato i-esimo del film
       var modello = document.getElementById('modello'); // metodo che ritorna il valore di un elemento, che prima nel codice abbiamo specificato con id = modello, che è in questo caso il div con classe col, si tratta della card del film
       var clone = modello.cloneNode(true);
       <!-- si tornano tutti gli elementi che hanno quel tag specifico in particolare noi stiamo cercando ora delle classi specifiche, tipo img, h5, p, a -->
