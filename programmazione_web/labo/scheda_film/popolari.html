@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Unimi film database </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col d-none" id="modello">
+                <div class="card" style="width: 18rem;">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"> </h5>
+                        <p class="card-text"> </p>
+                        <a href="scheda_film.html?id=" class="btn btn-primary"> Scheda film </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+
+    <script>
+        // script per prendere i dati dal database
+        // passi: fare la fetch, convertire da dato json a variabile javascript, infine asseggnare il valore della variabile a quella ausiliaria usata nel ciclo for
+
+        function mostraPopolari() {
+            // var page=getElementById('page').value;
+
+            fetch("https://api.themoviedb.org/3/movie/popular?page=1&lang=it-IT&api_key=0a445616bb0263bfbe8d3c1e4db72fc8")
+                .then(response => response.json())
+                .then(popolari => {
+
+                    var modello = document.getElementById('modello'); // creo una variabile che abbia come valore l'elemento del file html con l'id modello, nel nostro caso la card
+
+                    for (let i = 0; i < popolari.results.length; i++) {
+                        var film = popolari.results[i]; // creo una variabile con contenuto solo il singolo film trattato attualmente nel ciclo
+
+                        var clone = modello.cloneNode(true); // istanza di una variabile assolutamente uguale al modello di card, serve cloneNode perchè è un oggetto html
+                        /* 
+                        n.b: nelle prossime righe si userà getElementByTagName('')[0], quindi un array, perchè, come dalle slides lette, si sta operando con nodelist, tipo arrays
+                             si vuole modificare ed aggiungere il contenuto di una parte html, quindi pefforza bisogna usare nodi
+                        */
+
+                        clone.getElementsByTagName('img')[0].src += film.poster_path; // aggiungo all'indirizzo generico quello specifico per la locandina
+                        clone.getElementsByTagName('h5')[0].innerHTML = film.title; // dentro all'h5 della card si sostituisce il contenuto di film.title
+                        clone.getElementsByTagName('p')[0].innerHTML = film.overview; // stessa cosa di h5
+                        clone.getElementsByTagName('a')[0].href += film.id;
+                        //clone.getElementByTagName('a')[0].href += film.id + "lang=" + lang;
+                        clone.classList.remove('d-none'); // dato che ho avuto problemi a capire sta cosa, qua sotto si fa un commento più dettagliato (thx chatgpt)
+                        /*
+                        classList in sostanza serve a gestire le classi di clone, che in questo caso è la colonna con all'interno la card, tramite il metodo remove si toglie dalle calssi css presenti in clnoe quello che c'è tra le parentesi.
+                        Nel caso specifico, dato che di base la colonna è nascosta, togliendo d-none si va effettivamente a mostrare la colonna
+                        */
+                        clone.id = i; // si sostituisce l'id del modello con il numero progressivo di film mostrato, per non avere ambiguità
+                        modello.before(clone);  // in sostanza è un comando che inserisce il clone, in questo caso un oggetti html, prima di modello nel DOM, questo non me lo so proprio spiegare ma tant'è
+
+
+                    }
+
+
+                });
+
+        };
+
+        mostraPopolari()
+
+
+
+
+
+    </script>
+</body>
+
+</html>
