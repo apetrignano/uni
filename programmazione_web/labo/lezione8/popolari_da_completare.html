@@ -45,7 +45,7 @@
     lang = it-IT;
 
     function pulisciDiv() {}; // da implementare
-    function mostraPopolari() { // no non ho capito da questo punto in poi, manca qualcosa, da ricostruire
+    function mostraPopolari() {
       var page = document.getElementById('page').value;
 
       fetch('https://api.themoviedb.org/3/movie/popular?page='+page'&lang='+lang+'&api_key=0a445616bb0263bfbe8d3c1e4db72fc8')

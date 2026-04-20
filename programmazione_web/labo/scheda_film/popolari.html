@@ -11,6 +11,31 @@
 
 <body>
 
+    <div class="container">
+        <div class="row">
+            <label for="range3" class="form-label"> </label>
+            <input type="number" id="page" min="1" max="5" step="1" value="1" onchange="mostraPopolari()">
+        </div>
+    </div>
+    <!--- è un semplice di form, ogni volta che si fa un cambiamento del numero all'interno si fa una chiamata alla funzione mostraPopolari-->
+
+    <div class="container">
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Lingua
+            </button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item" type="button" value="it-IT" onclick="setLingua(this.value)">Italiano</button></li>
+                <li><button class="dropdown-item" type="button" value="en-US" onclick="setLingua(this.val)">Inglese</button></li>
+                <li><button class="dropdown-item" type="button" value="es-ES" onclick="setLingua(this.val)">Spagnolo</button></li>
+            </ul>
+        </div>
+
+    </div>
+
+
 
     <div class="container">
         <div class="row">
@@ -34,17 +59,29 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-
     <script>
-        // script per prendere i dati dal database
-        // passi: fare la fetch, convertire da dato json a variabile javascript, infine asseggnare il valore della variabile a quella ausiliaria usata nel ciclo for
 
+        function pulisciDiv() {
+
+            let i = 0;
+            let card = document.getElementById(i); // ci si riferisce all'elemento con id di valore i, che non è ambiguo
+
+            while (card != null) {
+                card.remove();
+                i++;
+                card = document.getElementById(i);
+            }
+            // si sta implementando una funzione che, dato un numeri variabile di indici, svuoti ogni elemento di indice i del suo contenuto, va proprio cancellato
+        };
         function mostraPopolari() {
-            // var page=getElementById('page').value;
 
-            fetch("https://api.themoviedb.org/3/movie/popular?page=1&lang=it-IT&api_key=0a445616bb0263bfbe8d3c1e4db72fc8")
-                .then(response => response.json())
-                .then(popolari => {
+            pulisciDiv();
+
+            var page = document.getElementById('page').value; // questa cosa prende il valore del form con il numero della pagina, che appunto ha come id 'page', e lo inserisce nella variabile page(lo stesso nome di id e variabile è obv casuale)
+
+            fetch("https://api.themoviedb.org/3/movie/popular?page=" + page + "&lang=" + lang + "&api_key=0a445616bb0263bfbe8d3c1e4db72fc8") // va a connettersi con il database
+                .then(response => response.json()) // converte il dato da .json a variabile js
+                .then(popolari => { // assegna il valore nella variabile "popolari"
 
                     var modello = document.getElementById('modello'); // creo una variabile che abbia come valore l'elemento del file html con l'id modello, nel nostro caso la card
 
@@ -67,7 +104,7 @@
                         classList in sostanza serve a gestire le classi di clone, che in questo caso è la colonna con all'interno la card, tramite il metodo remove si toglie dalle calssi css presenti in clnoe quello che c'è tra le parentesi.
                         Nel caso specifico, dato che di base la colonna è nascosta, togliendo d-none si va effettivamente a mostrare la colonna
                         */
-                        clone.id = i; // si sostituisce l'id del modello con il numero progressivo di film mostrato, per non avere ambiguità
+                        clone.id = i; // si sostituisce l'id del modello con il numero pro
                         modello.before(clone);  // in sostanza è un comando che inserisce il clone, in questo caso un oggetti html, prima di modello nel DOM, questo non me lo so proprio spiegare ma tant'è
 
 
@@ -78,7 +115,12 @@
 
         };
 
-        mostraPopolari()
+        function setLingua(val) {
+            lang = val;
+            mostraPopolari();
+        }
+
+        mostraPopolari();
 
 
 
