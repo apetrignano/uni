@@ -15,15 +15,17 @@
         <div class="card mb-3" id="modello-carta">
             <div class="row g-0">
                 <div class="col-md-3">
-                    <img src="" class="img-fluid rounded-start" alt="..." id="locandina-film">
+                    <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2/" class="w-100" id="locandina-film">
                 </div>
                 <div class="col-md-9">
                     <div class="card-body">
-                        <h2 class="card-title m-2"> </h2>
+                        <h2 class="card-title m-2" id="titolo"> </h2>
                         <div class="row m-2">
                             <h4>Descrizione</h4>
                         </div>
-                        <div class="row m-2" id="descrizione"> </div>
+                        <div class="row m-2">
+                            <p id="trama"> </p>
+                        </div>
                         <div class="row m-2">
                             <div class="col-4">
                                 <h6 id="regia"></h6>
@@ -38,7 +40,8 @@
             <h3> Attori in primo piano </h3>
             <div class="col" id="colonnaAttore">
                 <div class="card" style="width: 18rem;">
-                    <img src="" class="card-img-top" alt="..." id="immagine-attore">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/" class="card-img-top" alt="..."
+                        id="immagine-attore">
                     <div class="card-body">
                         <h4 class="actor"> </h4>
                     </div>
@@ -51,8 +54,51 @@
             crossorigin="anonymous"></script>
 
         <script>
+            var parametri = new URLSearchParams(window.location.search); // costruttore, istanzia un oggetto di tipo urlsearchparams, partendo dal parametro attuale, fornisce tutta una serie di metodi ed attributi
+            // in altre parole, restituisce il valore di una variabile presente nell'url
+            id_film = parametri.get('id');
+            lingua = parametri.get('lingua');
 
             // qui ci vanno le istruzioni per la visualizzazione della scheda film
+            // serve una seconda fetch obv
+            function mostraScheda() {
+                fetch(`https://api.themoviedb.org/3/movie/${id_film}?api_key=0a445616bb0263bfbe8d3c1e4db72fc8&language=${lingua}`)
+                    .then(response => response.json())
+                    .then(film => {
+
+                        document.getElementById("titolo").innerHTML = film.title; // mette il valore di film.title dentro al pezzo di html con id titolo
+                        document.getElementById("locandina-film").src += film.poster_path; // serve attributo src, perchè stiamo concatenando una stringa ad una già esistente
+                        document.getElementById("trama").innerHTML = film.overview;
+
+                    }
+                    )
+            };
+
+
+            var modello = document.getElementById("colonnaAttore");
+
+            fetch(`https://api.themoviedb.org/3/movie/${id_film}/credits`)
+                .then(res => res.json())
+                .then(attori => {
+                    for (var i = 0; i < attori.cast.length; i++) {
+
+                        var clone = modello.cloneNode(true);
+                        var attore = attori.cast[i];
+                        // popoliamo la card
+
+                        clone.getElementsByClassName('card-title')[0].innerHTML += attore.character;
+                        clone.getElementsByClassName('card-text')[0].innerHTML += attore.name;
+                        clone.getElementsByTagName('img')[0].src += attore.profile_path;
+                        clone.getElementsByTagName('a')[0].href += `${attore.id}&lingua=${lingua}`;
+
+                        clone.classList.remove('d-none');
+                        clone.id = attore.id;
+                        modello.before(clone);
+                    }
+
+                });
+
+            mostraScheda();
 
 
         </script>

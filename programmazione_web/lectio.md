@@ -837,3 +837,17 @@ Prossimi steps:
 
 
 Se i dati sono diversi, l'url è diverso ed obv bisogna fare due fetch; a volte sono legati, nel senso che un dato del secondo url sarà parte del primo, questa cosa semplicemente si fa con DOM, molto semplicemente.
+
+
+
+
+# Lezione 9
+
+
+Oggi si introduce la ricerca di qualcosa, oltre ai cenni di architettura `REST`.
+
+Ha parlato di `window.Location`, che contiene cose, non ho capito cosa.
+
+`window.Location.search` è area dell'url che contiene la stringa con tutti i parametri "opzionali".
+
+Per maggior ordine per quanto riguarda le funzioni, si può fare `<script src=lib.js></script>`, in questo modo si va a cercare un file chiamato così, il nome può anche essere diverso, però diciamo che così si spezza il main, come è comodo fare.
