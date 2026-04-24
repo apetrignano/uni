@@ -851,3 +851,12 @@ Ha parlato di `window.Location`, che contiene cose, non ho capito cosa.
 `window.Location.search` è area dell'url che contiene la stringa con tutti i parametri "opzionali".
 
 Per maggior ordine per quanto riguarda le funzioni, si può fare `<script src=lib.js></script>`, in questo modo si va a cercare un file chiamato così, il nome può anche essere diverso, però diciamo che così si spezza il main, come è comodo fare.
+
+Per martedì prossimo: finire scheda attore ed agiungere la funzione di ricerda.
+
+
+Ha spiegato il progetto da portare all'esame: è quello dell'anno scorso.
+
+
+
+introdott anuova modalità "smart", ciò significa che si può portare un progetto ridotto, il cui voto massimo è 24/25.
