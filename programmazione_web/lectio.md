@@ -1,3 +1,6 @@
+# Parte 1 - Front-end
+
+
 # Lezione 1
 
 
@@ -889,3 +892,76 @@ Ci sono vari metodi REST, uno tra i quali lo abbiamo già usato, il *get*, che i
 È discretamente importante lo swagger, il quale si tratta di una semplice documentazione di come ci si deve interfacciare con l'API, non dobbiamo creare un nuovo sito, più avanti lo vedremo bene. Un esempio è l'API reference di tmdb.
 
 Importantissimo leggere post-get, post-put e negoziazione, le chiede praticamente sempre allo scritto.
+
+# Parte 2 - Back-end
+
+# Lezione 11
+
+Ciò che bisogn ricordare di *REST* è che possiamo accedere ai dati in 4 modi diversi: lettura, aggiunta, aggiornamento, rimozione. Fino ad ora il backend lo abbiamo usato, non è che abbiamo fatto frontend, però non lo abbiamo scritto noi, era `tmdb`, ad esempio abbiamo preso i risultati di film popolari e abbiamo estrapolato il cast etc, avevamo l'accesso in lettura, non potevamo però fare il resto, non potevamo aggiungere direttamente dei film o registrare degli utenti da salvare nei server di `tmdb`, però possiamo crearlo noi, con dati tutti nostri e squillo di lusso, *in aggiunta* ai dati di tmdb ad esempio, e far parlare tutto cià con li frontend.
+
+Il backend è composto principalmente di 2 documenti:
+* dati, mgestiti da qualsiasi database `dbms` (nel nostro caso `mongoDB`), per salvarli e poterli leggere;
+* programma che attende di fare le richieste, non mi ricordo il nome tecnico che il profe ha detto (nel nostro caso lo facciamo con `nodejs`, che abbiamo anche trattato in precedenza).
+
+`nodejs` è un *framework*, anche piuttosto grande, non lo tratteremo in modo esaustivo; inoltre, `npm` è una repo di pacchetti, molto comoda per quanto riguarda la gestione del backend, noi tramite ciò useremo una libreria chiamata `express` (non va per forza scaricato per ora, anche perchè è più grande di nodejs stesso).
+
+## Node.js
+
+Primo ambiente javascript *lato server*, multipiattaforma e basato sul motore javascript v8, di Google, una caratteristica è che è *non bloccante*, significa solo che non esegue tutte le operazioni iniziandone una dopo che la precedente è finita, bensì vengono svolte quasi in contemporanea, perciò se una parte ha problemi non si blocca tutto, ma solo quell'operazione specifica.
+
+Ogni pacchetto di nodejs può essere installato *globalmente* o *localmente*, chiaramente il primo rende i pacchetti installati su *tutti i backend* del computer, è consigliabile installare tutti i pacchetti in modo locale, in quanto in questo modo, dato che vengono continuamente rilasciate versioni di pacchetti e nodejs, un aggiornamento non necessario potrebbe creare conflitti importanti.
+
+* dico dentro al programma nodejs di installare il pacchetto in modo locale, poi si vedrà la sintassi.
+
+##### Sintassi
+
+```
+npm install --global express
+npm install express
+npm uninstall --global express
+npm uninstall express
+```
+
+Senza la flag `global` chiaramente non c'è installazione globale.hiaramente non c'è installazione globale.
+
+### Creare un server web
+
+A noi serve questo per creare il nostro server web, di base è un bel po' dispendioso, pertanto noi useremo delle librerie tipo express che lo fanno in automatico.
+
+Adesso si fa la prima serie di ragionamenti per creare la prima API.
+
+Quando si installa express si scaricano tante librerie, contenute in una cartella, ed altri due file di tipo `.json`.
+
+In fase di consegna del programma, si passa il main.js, ed i vari `json` dei pacchetti, non la libreria con i pacchetti, perchè se no sarebbe un casino per quanto riguarda il peso, alla fine del corso arriveremo anche a 100 mb di file.
+
+Noi con quello che stiamo facendo ora è creare un backend aperto all'api 
+
+### Domanda che ci sarà sempre all'esame
+
+* Differenza tra patch e ...?
+
+* *risposta*: patch aggiorna solo i dati che vengono passati, l'altro metodo sostituisce l'intero oggetto..
+
+##### Per far partire il programma
+
+```
+node main.js
+```
+
+
+Per fare la richiesta si fa `localhost:{numeroporta}<eventuale percorso specificato nella chiamata del metodo>`.
+
+la libreria `nodemon` invece fa il refresh automatico ad ogni save del main.js.
+
+Non è che noi possiamo fare 10k righe di get e basta, per ogni tipo di cartella, serve un automatismo chiaramente, nell'url è possibile usare oltre ad i caratteri il `:id`, o un'altra etichetta
+
+Sta ora parlando del middleware, ossia non lo so cosa ossia, però sta spiegando ciò:
+
+```
+const myLogger = function(req, res) {
+
+  codice
+
+}
+```
+Si tratta di una istanziazione di una variabile a cui è associato il risultato di una funzione chiamata function
