@@ -57,6 +57,15 @@ function mostraPopolari() {
 
 };
 
+function aggiornaTasti() {
+
+}
+
+function aggiornaPopolari() {
+
+
+}
+
 function ricerca() {
 
 
@@ -65,28 +74,51 @@ function ricerca() {
     body.innerHTML = "";
     body.append(modello);
 
-    var query = document.getElementById("ricerca_film").value;
-    var lang = document.getElementById('lingua').value;
+    if (document.getElementById("ricerca_film").value == "") {
+        mostraPopolari();
+    } else {
+        var query = document.getElementById("ricerca_film").value;
+        var lang = document.getElementById('lingua').value;
 
-    fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&language=${lang}&api_key=${api_key}`)
-        .then(res => res.json()) 
-        .then(risultati => {
+        fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&language=${lang}&api_key=${api_key}`)
+            .then(res => res.json())
+            .then(risultati => {
 
-            for (let i = 0; i < risultati.results.length; i++) {
-                var film = risultati.results[i]; 
+                 for (let i = 0; i < risultati.results.length; i++) {
+                    var film = risultati.results[i];
 
-                var clone = modello.cloneNode(true);
+                    var clone = modello.cloneNode(true);
 
-                clone.getElementsByTagName('img')[0].src = "https://media.themoviedb.org/t/p/w440_and_h660_face" + film.poster_path; 
-                clone.getElementsByTagName('h5')[0].innerHTML = film.title; 
-                clone.getElementsByTagName('p')[0].innerHTML = film.overview; 
-                //clone.getElementsByTagName('a')[0].href += film.id;
-                clone.getElementsByTagName('a')[0].href = "scheda_film.html?id=" + film.id;
-                clone.classList.remove('d-none'); 
-                clone.id = i; 
-                modello.before(clone);  
+                    clone.getElementsByTagName('img')[0].src = "https://media.themoviedb.org/t/p/w440_and_h660_face" + film.poster_path;
+                    clone.getElementsByTagName('h5')[0].innerHTML = film.title;
+                    clone.getElementsByTagName('p')[0].innerHTML = film.overview;
+                    //clone.getElementsByTagName('a')[0].href += film.id;
+                    clone.getElementsByTagName('a')[0].href = "scheda_film.html?id=" + film.id;
+                    clone.classList.remove('d-none');
+                    clone.id = i;
+                    modello.before(clone);
 
-            }
+                }
+                /*
+                n.b: si poteva anche fare mostrapopolari, tanto a noi interessa aggiungere delle variabili per la prima parte di fetch, poi è uguale
+                */
 
-        });
+            });
+    }
+}
+
+function prossimaPagina() {
+    if(contatore < 500) {
+        contatore++;
+        aggiornaTasti();
+        aggiornaPopolari();
+    }
+}
+
+function precedentePagina() {
+    if(contatore > 1) {
+        contatore--;
+        aggiornaTasti();
+        aggiornaPopolari();
+    }
 }

@@ -32,10 +32,10 @@
 
                 </ul>
             </div>
-            <form>
+            <form onsubmit="ricerca(); return false;"<!-- serve anche il return false, perchè altrimenti continua ad aggiornarsi, ricercando quindi il campo vuoto -->
                 <div>
-    <!-- <label for="exampleInputEmail1" class="form-label">Email address</label> -->
-                    <input class="form-control" id="ricerca_film" placeholder="Ricerca film" type="search" oninput="ricerca()">
+                    <input class="form-control" id="ricerca_film" placeholder="Ricerca film" type="search">
+                    <button type="submit"> Cerca </button>
                 </div>
             </form>
     </nav>
