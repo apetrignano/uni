@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+    <title></title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="mt-4 ">
+            <input type="search" id="query" class="form-control"  onkeyup="cerca()" placeholder="Cerca Film">
+
+            <select class="form-select" id="lingua" >
+                <option value="it-IT">Italiano</option>
+                <option value="en-US">Americano</option>
+                <option value="fr-FR">Francese</option>
+                <option value="cn-CN">Cinese</option>
+            </select>
+        </div>
+       
+    </div>
+    <div class="container">
+
+        <div id="lista" class="row g-4 mt-4 p-4">
+            <div id="master" class="col-4 col-md-3 d-none">
+                <div class="card h-100">
+                    <img class="card-img-top" >
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text"></p>
+
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <small class="card-date text-body-secondary"></small>
+                        </p>
+                        <a href="#" class="btn btn-secondary">Scheda</a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+
+    <!-- <script src="popolari.js"></script> -->
+
+    <script src="lib.js"></script>
+
+    <script>
+
+
+        function cerca() {
+            // page = document.getElementById('page').value
+            query = document.getElementById('query').value
+            language = document.getElementById('lingua').value
+            fetch("https://api.themoviedb.org/3/search/movie?language=" + language + "&query=" + query + "&api_key=2461e2dc84a8e379ad6a8309c585a25d")
+                .then(response => response.json())
+                .then(popolari => mostraPopolari(popolari))
+        }
+
+      
+
+    </script>
+</body>
+
+</html>

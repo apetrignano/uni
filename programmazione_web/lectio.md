@@ -860,3 +860,32 @@ Ha spiegato il progetto da portare all'esame: è quello dell'anno scorso.
 
 
 introdott anuova modalità "smart", ciò significa che si può portare un progetto ridotto, il cui voto massimo è 24/25.
+
+
+
+# Lezione 10
+
+# REST
+
+Acronimo di "REpresentational State Transfer", gestisce tipi di contenuto variabile, è un cosiddetto *stile architetturale*, si occupa principalmente di gestione e sccambio di dati e metadati.
+Permette interfacce generiche, un set di funzionalità attraverso una serie di iso scaricabili, non so cosa ciò voglia dire sinceramente.
+
+La cosa importante sono le *risorse*, che sono ogni cosa che può avere un nome, ad esempio i documenti, le immagini, etc; dicono che esse sono *membership function*, a cui in un certo momento  viene associato un certo set di entità/valori, le risorse possono essere vuote, statiche o dinamiche, per esempio, prendendo una lista di film, un certo film è una risorsa statica, mentre per una lista di film preferiti il film a caso è una risorsa dinamica. 
+
+Tutto ciò lo stiamo studiando perchè ci serve per introdurre le sessioni per gli accessi ad account dei siti o un cambio di pagina migliore rispetto a quello che attualmente abbiamo sul nostro database di film.
+
+### Statelessness
+
+È ciò che useremo noi, perchè per gli studenti è più comodo, lato server è utile perchè le applicazioni sono facili da cachare, quindi *memorizzare*, poi boh, sincero per orannon capisco una sega.sega.
+
+
+### ?
+
+Informazioni più importanti devono essere messe prima, per appunto essere visualizzate subito, poi il resto in modo incrementale.
+
+
+Ci sono vari metodi REST, uno tra i quali lo abbiamo già usato, il *get*, che in *JavaScript* si usa con `fetch`; poi ci sono i *post*, *put*, e *delete*. con *post* si crea risorsa senza specificare l'url, da *put* si prende invece l'url, e lo aggiorna.
+
+È discretamente importante lo swagger, il quale si tratta di una semplice documentazione di come ci si deve interfacciare con l'API, non dobbiamo creare un nuovo sito, più avanti lo vedremo bene. Un esempio è l'API reference di tmdb.
+
+Importantissimo leggere post-get, post-put e negoziazione, le chiede praticamente sempre allo scritto.

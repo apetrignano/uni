@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Unimi film database </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">PWM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="popolari.html">Popolari</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="scheda-film.html">Scheda Film</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="utente.html">Profilo Utente</a>
+                    </li>
+
+                </ul>
+            </div>
+            <form onsubmit="ricerca(); return false;"<!-- serve anche il return false, perchè altrimenti continua ad aggiornarsi, ricercando quindi il campo vuoto -->
+                <div>
+                    <input class="form-control" id="ricerca_film" placeholder="Ricerca film" type="search">
+                    <button type="submit"> Cerca </button>
+                </div>
+            </form>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3 m-2" >
+                <!-- <label for="range3" class="form-label"> </label> -->
+                <input type="number" id="page" min="1" step="1" value="1" class="form-control" onchange="cambioPagina()">
+            </div>
+            <div class="col-3 m-2">
+                <select id="lingua" class="form-select" onchange="cambioLingua();">
+                    <option value="en-US"> Inglese</option>
+                    <option value="it-IT"> Italiano</option>
+                    <option value="zh-ZH"> Cinese</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!--- è un semplice di form, ogni volta che si fa un cambiamento del numero all'interno si fa una chiamata alla funzione mostraPopolari-->
+
+
+    <div class="container">
+        <div class="row" id="body">
+
+            <div class="col d-none" id="modello">
+                <div class="card" style="width: 18rem;">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"> </h5>
+                        <p class="card-text"> </p>
+                        <a href="scheda_film.html?id=" class="btn btn-primary"> Scheda film </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script src="li.js"></script>
+
+    <script>
+
+        // tutto ciò serve per la nostra scheda film, non direttamente nella sezione popolari
+
+        /* function pulisciDiv() {
+
+            let i = 0;
+            let card = document.getElementById(i); // ci si riferisce all'elemento con id di valore i, che non è ambiguo
+
+            while (card != null) {
+                card.remove();
+                i++;
+                card = document.getElementById(i);
+            }
+            // si sta implementando una funzione che, dato un numeri variabile di indici, svuoti ogni elemento di indice i del suo contenuto, va proprio cancellato
+        }; */
+        /* function mostraPopolari() {
+
+            pulisciDiv();
+
+            var page = document.getElementById('page').value; // questa cosa prende il valore del form con il numero della pagina, che appunto ha come id 'page', e lo inserisce nella variabile page(lo stesso nome di id e variabile è obv casuale)
+            var lang = document.getElementById('lingua').value;
+
+            fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}&language=${lang}&api_key=0a445616bb0263bfbe8d3c1e4db72fc8`) // va a connettersi con il database
+                .then(response => response.json()) // converte il dato da .json a variabile js
+                .then(popolari => { // assegna il valore nella variabile "popolari"
+
+                    var modello = document.getElementById('modello'); // creo una variabile che abbia come valore l'elemento del file html con l'id modello, nel nostro caso la card
+
+                    for (let i = 0; i < popolari.results.length; i++) {
+                        var film = popolari.results[i]; // creo una variabile con contenuto solo il singolo film trattato attualmente nel ciclo
+
+                        var clone = modello.cloneNode(true); // istanza di una variabile assolutamente uguale al modello di card, serve cloneNode perchè è un oggetto html
+                        /* 
+                        n.b: nelle prossime righe si userà getElementByTagName('')[0], quindi un array, perchè, come dalle slides lette, si sta operando con nodelist, tipo arrays
+                             si vuole modificare ed aggiungere il contenuto di una parte html, quindi pefforza bisogna usare nodi
+                        
+
+                        clone.getElementsByTagName('img')[0].src += film.poster_path; // aggiungo all'indirizzo generico quello specifico per la locandina
+                        clone.getElementsByTagName('h5')[0].innerHTML = film.title; // dentro all'h5 della card si sostituisce il contenuto di film.title
+                        clone.getElementsByTagName('p')[0].innerHTML = film.overview; // stessa cosa di h5
+                        clone.getElementsByTagName('a')[0].href += film.id;
+                        //clone.getElementByTagName('a')[0].href += film.id + "lang=" + lang;
+                        clone.classList.remove('d-none'); // dato che ho avuto problemi a capire sta cosa, qua sotto si fa un commento più dettagliato (thx chatgpt)
+                        /*
+                        classList in sostanza serve a gestire le classi di clone, che in questo caso è la colonna con all'interno la card, tramite il metodo remove si toglie dalle calssi css presenti in clnoe quello che c'è tra le parentesi.
+                        Nel caso specifico, dato che di base la colonna è nascosta, togliendo d-none si va effettivamente a mostrare la colonna
+                        
+                        clone.id = i; // si sostituisce l'id del modello con il numero progressivo
+                        modello.before(clone);  // in sostanza è un comando che inserisce il clone, in questo caso un oggetti html, prima di modello nel DOM, questo non me lo so proprio spiegare ma tant'è
+
+
+                    }
+
+
+                });
+
+        }; */
+
+        /*function cambioLingua() {
+
+            mostraPopolari();
+        };*/
+
+        // mostraPopolari();
+
+
+        /*
+
+        function ricerca() {
+            query=document.getElementById("ricerca").value; che è il valore da aggiungere all'url che è il valore da aggiungere all'url
+            fetch etc
+        }
+        */
+
+    </script>
+
+   <script>
+        mostraPopolari();
+    </script>
+
+
+
+</body>
+
+</html>

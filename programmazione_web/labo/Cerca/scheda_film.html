@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheda Film</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container ">
+        <div class="card mx-auto mt-4">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img class="card-img-top" id="card-img-top" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" id="card-title">Card title</h5>
+                        <p class="card-text" id="card-overview">Some quick example text to build on the card title and
+                            make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="input-group flex-nowrap">
+                          
+                        <input class="form-control" type="number" id="voto" value="5" step="0.5" max="10" min="0" />
+                        <button class="btn btn-primary" onclick="vota()">Vota!</button>
+                        </div>
+                        <div class="mt-2 alert alert-success" id="alert" role="alert">
+                            Hai votato!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="lib.js"></script>
+    <script>
+
+        var id = new URLSearchParams(window.location.search).get('id_film');
+
+        fetch(`${url_base}/movie/${id}?language=it-IT&api_key=${api_key}`)
+            .then(response => response.json())
+            .then(film => mostraScheda(film))
+
+        function mostraScheda(film) {
+            document.getElementById('card-img-top').src = indirizzo_base_poster + film.poster_path
+            document.getElementById('card-title').innerHTML = film.title
+            document.getElementById('card-overview').innerHTML = film.overview
+            for (genere of film.genres) {
+                // EQUIVALENTE: 
+                // for(var i=0; i< film.genres.length; i++){
+                //genere = film.genres[i]
+                document.getElementsByClassName('list-group-item')[0].innerHTML += genere.name + '&nbsp'
+            }
+            document.getElementsByClassName('list-group-item')[1].innerHTML = film.release_date
+            document.getElementsByClassName('list-group-item')[2].innerHTML += '$' + film.budget
+            document.getElementsByClassName('list-group-item')[3].innerHTML += '$' + film.revenue
+        }
+
+        function ottieni_sessione() {
+            return fetch(`${url_base}/authentication/guest_session/new?api_key=${api_key}`)
+                .then(response => response.json())
+                .then(json => json.guest_session_id)
+        }
+        
+        async function vota() {
+            var voto = document.getElementById('voto').value
+            session_id = await ottieni_sessione();
+
+
+            console.log(session_id)
+
+            payload = {
+                value: voto
+            }
+
+            opzioni = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(payload)
+            }
+
+            fetch(`${url_base}/movie/${id}/rating?guest_session_id=${session_id}&api_key=${api_key}`, opzioni)
+                .then(response => document.getElementById('alert').classList.remove('d-none'))
+
+
+        }
+
+
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
