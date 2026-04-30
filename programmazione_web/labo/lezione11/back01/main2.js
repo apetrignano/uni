@@ -1,23 +1,19 @@
 const express = require('express') // instanziazione di variabile contenente il pacchetto, il quale all'interno ha le classi
-// istanzia dentro la variabile express l'oggetto preso dal pacchetto "express"
 const app = express() // si associa ad app l'oggetto express, il quale è un singolo elemento del pacchetto express
 const port = 3000 // è uno standard, anche se non è estremamente sicura
 
-const myLogger = function(req, res, next) {
+const myLogger = function (req, res, next) { // si tratta di una middleware: è una funzione che viene chiamata prima di tutto quando si lancia l'applicativo, serve perchè ovviamente alcune cose è necessario farla prima di ogni altra cosa, tipo l'autenticazione etc
   console.log('LOGGED')
-const api_key= req.query.apy_key;
-
+  const api_key = req.query.apy_key;
   next() // passa alla funzione successiva
-
-
 }
 
 
 
 app.get('/:id', (req, res) => {
-    const id=req.params.id;
-    const lang=req.query.lang;
-    res.send(`risposta main2 in ${lang}`)
+  const id = req.params.id;
+  const lang = req.query.lang;
+  res.send(`risposta main2 in ${lang}`)
 })
 
 app.use(myLogger)
