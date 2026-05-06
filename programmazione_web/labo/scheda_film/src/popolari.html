@@ -32,7 +32,8 @@
 
                 </ul>
             </div>
-            <form onsubmit="ricerca(); return false;"<!-- serve anche il return false, perchè altrimenti continua ad aggiornarsi, ricercando quindi il campo vuoto -->
+            <form onsubmit="ricerca(); return false;" <!-- serve anche il return false, perchè altrimenti continua ad
+                aggiornarsi, ricercando quindi il campo vuoto -->
                 <div>
                     <input class="form-control" id="ricerca_film" placeholder="Ricerca film" type="search">
                     <button type="submit"> Cerca </button>
@@ -40,11 +41,34 @@
             </form>
     </nav>
 
+
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item">
+
+                <a class="page-link" href="#" onclick="precedentePagina()">Precedente</a>
+            </li>
+            <li class="page-item active" id="tprecedente">
+                <a id="pprecedente" onclick="precedentePagina()" class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item" aria-current="page" id="tcentrale">
+                <span id="pcentrale" class="page-link">2</span>
+            </li>
+            <li id="tsuccessiva" class="page-item">
+                <a id="psuccessiva" onclick="prossimaPagina()" class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#" onclick="prossimaPagina()">Successivo</a>
+            </li>
+        </ul>
+    </nav>
+
     <div class="container">
         <div class="row">
-            <div class="col-3 m-2" >
+            <div class="col-3 m-2">
                 <!-- <label for="range3" class="form-label"> </label> -->
-                <input type="number" id="page" min="1" step="1" value="1" class="form-control" onchange="cambioPagina()">
+                <input type="number" id="page" min="1" step="1" value="1" class="form-control"
+                    onchange="cambioPagina()">
             </div>
             <div class="col-3 m-2">
                 <select id="lingua" class="form-select" onchange="cambioLingua();">
@@ -157,9 +181,17 @@
         }
         */
 
+        var contatore = 1;
+        var psuccessiva = document.getElementById('psuccessiva');
+        var pcentrale = document.getElementById('pcentrale');
+        //console.log(centrale);
+        var pprecedente = document.getElementById('pprecedente');
+        aggiornaTasti();
+        aggiornaPopolari();
+
     </script>
 
-   <script>
+    <script>
         mostraPopolari();
     </script>
 

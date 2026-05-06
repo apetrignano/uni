@@ -59,11 +59,37 @@ function mostraPopolari() {
 
 function aggiornaTasti() {
 
+    pcentrale.innerHTML = contatore;
+
+    tsuccessiva = document.getElementById('tsuccessiva');
+    tcentrale = document.getElementById('tcentrale');
+    tprecedente = document.getElementById('tprecedente');
+
+    if (contatore == 1) {
+        tsuccessiva.classList.remove('active');
+        tcentrale.classList.remove('active');
+        tprecedente.classList.add('active');
+        pcentrale.innerHTML = contatore + 1;
+        psuccessiva.innerHTML = contatore + 2;
+    } else if (contatore > 499) {
+        tcentrale.classList.remove('active');
+        tsuccessiva.classList.remove('active');
+        pcentrale.innerHTML = contatore - 1;
+        pprecedente.innerHTML = contatore - 2;
+        psuccessiva.innerHTML = contatore;
+    } else {
+        tsuccessiva.classList.remove('active');
+        tcentrale.classList.add('active');
+        tprecedente.classList.add('active');
+        tprecedente.innerHTML = contatore - 1;
+        tsuccessiva.innerHTML = contatore + 1;
+    }
+
+
 }
 
 function aggiornaPopolari() {
-
-
+    mostraPopolari();
 }
 
 function ricerca() {
@@ -84,7 +110,7 @@ function ricerca() {
             .then(res => res.json())
             .then(risultati => {
 
-                 for (let i = 0; i < risultati.results.length; i++) {
+                for (let i = 0; i < risultati.results.length; i++) {
                     var film = risultati.results[i];
 
                     var clone = modello.cloneNode(true);
@@ -108,7 +134,7 @@ function ricerca() {
 }
 
 function prossimaPagina() {
-    if(contatore < 500) {
+    if (contatore < 500) {
         contatore++;
         aggiornaTasti();
         aggiornaPopolari();
@@ -116,7 +142,7 @@ function prossimaPagina() {
 }
 
 function precedentePagina() {
-    if(contatore > 1) {
+    if (contatore > 1) {
         contatore--;
         aggiornaTasti();
         aggiornaPopolari();

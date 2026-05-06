@@ -8,11 +8,17 @@ const myLogger = function (req, res, next) { // si tratta di una middleware: è 
   next() // passa alla funzione successiva
 }
 
+// eseguita prima dell'API, ad esempio, verifica tipo che la api_key sia corretta, cose così
+
+
+app.get('/', (req, res) => {
+  res.send('pagina base');
+})
 
 
 app.get('/:id', (req, res) => {
   const id = req.params.id;
-  const lang = req.query.lang;
+  const lang = req.query.lang; // è un valore passato nella "query" appunto, ossia quella parte di link che sta dopo il punot di domanda
   res.send(`risposta main2 in ${lang}`)
 })
 

@@ -900,7 +900,7 @@ Importantissimo leggere post-get, post-put e negoziazione, le chiede praticament
 Ciò che bisogn ricordare di *REST* è che possiamo accedere ai dati in 4 modi diversi: lettura, aggiunta, aggiornamento, rimozione. Fino ad ora il backend lo abbiamo usato, non è che abbiamo fatto frontend, però non lo abbiamo scritto noi, era `tmdb`, ad esempio abbiamo preso i risultati di film popolari e abbiamo estrapolato il cast etc, avevamo l'accesso in lettura, non potevamo però fare il resto, non potevamo aggiungere direttamente dei film o registrare degli utenti da salvare nei server di `tmdb`, però possiamo crearlo noi, con dati tutti nostri e squillo di lusso, *in aggiunta* ai dati di tmdb ad esempio, e far parlare tutto cià con li frontend.
 
 Il backend è composto principalmente di 2 documenti:
-* dati, mgestiti da qualsiasi database `dbms` (nel nostro caso `mongoDB`), per salvarli e poterli leggere;
+* dati, gestiti da qualsiasi database `dbms` (nel nostro caso `mongoDB`), per salvarli e poterli leggere;
 * programma che attende di fare le richieste, non mi ricordo il nome tecnico che il profe ha detto (nel nostro caso lo facciamo con `nodejs`, che abbiamo anche trattato in precedenza).
 
 `nodejs` è un *framework*, anche piuttosto grande, non lo tratteremo in modo esaustivo; inoltre, `npm` è una repo di pacchetti, molto comoda per quanto riguarda la gestione del backend, noi tramite ciò useremo una libreria chiamata `express` (non va per forza scaricato per ora, anche perchè è più grande di nodejs stesso).
@@ -922,7 +922,7 @@ npm uninstall --global express
 npm uninstall express
 ```
 
-Senza la flag `global` chiaramente non c'è installazione globale.hiaramente non c'è installazione globale.
+Senza la flag `global` chiaramente non c'è installazione globale. Chiaramente non c'è installazione globale.
 
 ### Creare un server web
 
@@ -934,13 +934,13 @@ Quando si installa express si scaricano tante librerie, contenute in una cartell
 
 In fase di consegna del programma, si passa il main.js, ed i vari `json` dei pacchetti, non la libreria con i pacchetti, perchè se no sarebbe un casino per quanto riguarda il peso, alla fine del corso arriveremo anche a 100 mb di file.
 
-Noi con quello che stiamo facendo ora è creare un backend aperto all'api 
+Noi con quello che stiamo facendo ora è creare un backend aperto all'api.
 
 ### Domanda che ci sarà sempre all'esame
 
 * Differenza tra patch e ...?
 
-* *risposta*: patch aggiorna solo i dati che vengono passati, l'altro metodo sostituisce l'intero oggetto..
+* *risposta*: patch aggiorna solo i dati che vengono passati, l'altro metodo sostituisce l'intero oggetto.
 
 ##### Per far partire il programma
 
@@ -964,4 +964,77 @@ const myLogger = function(req, res) {
 
 }
 ```
-Si tratta di una istanziazione di una variabile a cui è associato il risultato di una funzione chiamata function
+Si tratta di una istanziazione di una variabile a cui è associato il risultato di una funzione chiamata function, in pratica un *middleware* è semplicemente un pezzo di codice che viene eseguito subito dopo il caricamento dell'host, tipo il riconoscimento dell'utente o altro.
+
+
+# Lezione 12
+
+# MongoDB
+
+È un *database di documenti*, in particolar efile chiamati `bson`, quindi dei json binari; non dobbiamo sapere chissà quanto in realtà.
+
+### Struttura base documento `bson`
+
+* ObjectId, esempio: `"_id": Objectid("2342j4k2")`
+* String (ci vogliono le virgolette);
+* Int32/Double (non ci vogliono virgolette);
+* Embedded Doc (un sottodocumento, una peculiarità di mongoBD);
+* Array;
+* Boolean;
+* Date.
+
+#### Collections
+
+Si tratta di gruppi di documenti, delle cartelle praticamente, la cosa carina è che ogni documento ha campi diversi dagli altri, la struttura non è per niente fissa, l'unica cosa fissa è il campo `_id`, stop; il prof ha fatto l'esempio della biblioteca: non hanno per forza solo libri, alcune di esse danno in prestito anche i film, o dischi, persino giochi da tavola, dipende, ma non è certo per tutte le biblioteche.
+
+## Gestione pratica di collection
+
+#### Creazione
+
+```javascript
+// creazione implicita
+db.utenti.insertOne({nome:"Angelo"}) // se più di uno: insertMany()
+
+// creazione esplicita
+db.createCollection("prodotti", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["nome", prezzo]
+      }
+    }
+})
+```
+
+#### Listare ed eliminare
+
+```javascript
+//listare
+show collections
+db.getCollectionNames()
+
+//rinominare
+db.utenti.renameCollection(
+  "clienti"
+)
+//eliminare
+db.clienti.drop()
+
+//vedere le statistiche
+db.utenti.stats()
+```
+
+Si possono anche creare schemi di validation o audit&analisi.
+
+C'è da ricordarsi che c'è una risposta, sempre:
+
+```javascript
+{
+  "acknowledged": true;
+  "insertedId": ObjectId("...")
+}
+
+
+```
+
+Ora dobbiamo fare 
