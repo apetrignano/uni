@@ -45,7 +45,7 @@ npm install express mongodb dotenv
 Su `.env`:
 
 ```
-MONGODB_URI=mongodb:<link> // qui andrebbe messo il link che si trova su mongodb Atlas, facendo connect e compass
+MONGODB_URI=mongodb://localhost:27017 // qui andrebbe messo il link che si trova su mongodb Atlas, facendo connect e compass
 DB_NAME=sample_mflix
 ```
 
