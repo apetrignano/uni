@@ -34,7 +34,7 @@ app.get('/movies', async(req, res) => {
 
   const collection = db.collection('movies');
 
-  const filtro = {$and: [{
+  const filtro = {
     year: {
         $gte: min,
         $lte: max
@@ -43,8 +43,7 @@ app.get('/movies', async(req, res) => {
         $regex: titolo,
         $options: "i"
     }
-    }]
-  }
+    }
 
   const films = await collection
     .find(filtro)
