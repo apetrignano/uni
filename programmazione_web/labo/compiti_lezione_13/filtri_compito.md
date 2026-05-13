@@ -49,3 +49,17 @@ db.movies.find({
 ```
 
 ## Esercizio 5: ricerca di un film in un range di anni per titolo, che non ha un'altra parola nel titolo
+
+```javascript
+db.movies.find({
+  year: {
+    $gt: <anno_minore>,
+    $lt: <anno_maggiore>
+  },
+  title: {
+    $regex: "<titolo>",
+    $options: "i",
+    $ne: "<parola_da_escludere>"
+  }
+})
+```
