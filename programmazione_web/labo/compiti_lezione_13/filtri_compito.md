@@ -2,7 +2,7 @@
 
 ## Esercizio 1: ricerca di film per titolo
 
-```
+```javascript
 db.movies.find({
   title: {
     $regex: "<titolo>",
@@ -14,7 +14,7 @@ db.movies.find({
 
 ## Esercizio 2: ricerca di film per anno di produzione
 
-```
+```javascript
 db.movies.find({
   year: <anno>
 })
@@ -22,7 +22,7 @@ db.movies.find({
 
 ## Esercizio 3: ricerca di film compresi tra due anni
 
-```
+```javascript
 db.movies.find({
   year: {
     $gt: <anno_minore>,
@@ -33,7 +33,7 @@ db.movies.find({
 
 ## Esercizio 4: ricerca di film compresi tra due anni e per titolo
 
-```
+``` javascript
 db.movies.find({
   $and: [
     {year: {
@@ -63,3 +63,14 @@ db.movies.find({
   }
 })
 ```
+
+## Esercizio 6: verifica esistenza utente con una certa email e password
+
+Tosta, è da integrare, perchè si modifica proprio il metodo, da `get` a `post`.
+
+```javascript
+
+
+```
+
+
