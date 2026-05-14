@@ -43,7 +43,11 @@ app.get('/movies', async(req, res) => {
 
   res.status(200).json(films);
 
+  /* db.collection.find(filtro),
+    { title: 1, year: 1, plot: 1, _id: 0 })
+   */
 });
+
 
 const PORT = 3000;
 

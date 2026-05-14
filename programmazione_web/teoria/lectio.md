@@ -1041,5 +1041,19 @@ Ora dobbiamo fare
 
 
 
-# Lezione 13
+# Lezione 13 (penultima lezione)
 
+### 
+
+Per ora sta mostrando frammenti di codice, che però sembrano meno avanzati rispetto a quello che abbiamo fatto prima.
+
+`post` è il metodo per creare; qualsiasi API non risponde mai solo con lo stato, ma anche con altro, tipo un id se va tutto bene, se errore un messaggio che dice errore, o perchè una azione non si può fare
+
+
+Qualsiasi API ha sempre un template del genere: header, varie opzioni, messaggi di errore.
+
+
+recupero parametri, 
+
+
+preparare form, con from e to, che 
