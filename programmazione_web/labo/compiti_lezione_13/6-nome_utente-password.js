@@ -59,7 +59,7 @@ const PORT = 3000;
 connectDB()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Server avviato su http://localhost:${PORT}`);
+      console.log(`Server avviato su http://localhost:${PORT}/users`);
       //console.log(`Link di prova: http://localhost:${PORT}/movies?min=<min>&max=<max>`)
     });
   })
