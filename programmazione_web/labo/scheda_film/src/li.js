@@ -22,8 +22,8 @@ function mostraPopolari() {
     var lang = document.getElementById('lingua').value;
 
     fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}&language=${lang}&api_key=${api_key}`) // va a connettersi con il database
-        .then(response => response.json()) // converte il dato da .json a variabile js
-        .then(popolari => { // assegna il valore nella variabile "popolari"
+        .then(response => response.json()) // converte la promise restituita dalla fetch in un json
+        .then(popolari => { // converte da json a variabile js facendo tutto ciò che è incluso nell'implementazione
 
             //var modello = document.getElementById('modello'); // creo una variabile che abbia come valore l'elemento del file html con l'id modello, nel nostro caso la card
 
