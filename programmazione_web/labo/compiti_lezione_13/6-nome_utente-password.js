@@ -4,7 +4,7 @@ import {MongoClient} from 'mongodb';
 
 const app = express(); 
 app.use(express.json());
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGO_URI;
 const dbName = process.env.DB_NAME;
 
 const client = new MongoClient(uri);
