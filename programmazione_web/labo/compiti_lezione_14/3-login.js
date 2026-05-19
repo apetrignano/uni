@@ -27,6 +27,8 @@ app.post('/login', async (req, res) => {
         const client = await MongoClient.connect(mongoURL);
         const coll = client.db('sample_mflix').collection('users');
         const cursor = await coll.findOne(query);
+        const result = await cursor.toArray();
+        console.log(result);
 
         if(cursor) res.status(200).json({messaggio: 'login effettuato con successo!', utente: cursor.email});
         else res.status(401).json({errore: "nome utente o password non validi"});
