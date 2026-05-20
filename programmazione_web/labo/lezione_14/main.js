@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
-const ObjectID = require('mongodb').ObjectId;
+const ObjectId = require('mongodb').ObjectId;
 const app = express();
 const port = 3001;
 const mongoURL = process.env.MONGO_URI;
@@ -75,7 +75,7 @@ app.get('/movies/:id', async (req, res) => {
     console.log(id);
     const client = await MongoClient.connect(mongoURL);
     const coll = client.db('sample_mflix').collection('movies');
-    const cursor = coll.find(new ObjectID(id));
+    const cursor = coll.find({_id:  new ObjectID(id)});
     const result = await cursor.toArray();
     await client.close();
     res.json(result);
@@ -144,13 +144,17 @@ app.delete('/user/:id', async (req, res) => {
 
     try {
         const client = await MongoClient.connect(mongoURL);
+        console.log('connesso con uri');
         const coll = client.db('lezioni').collection('users');
-        //console.log('connesso al database');
+        console.log('connesso con collection');
 
-        const result = await coll.deleteOne({_id: ObjectId(id)});
-        if(result) console.log('eliminato con successo!');
+        const result = await coll.deleteOne({_id: new ObjectId(id)});
+        console.log('trovato id corrispondente ad utente');
+        
+        //if(result) console.log('eliminato con successo!');
+        res.status(200).json({success: true, message: "utente eliminato"});
     } catch(error) {
-
+        console.log(error);
         res.status(500).json({success: false, message: "errore generico"});
     }
     //res.send(`DELETED ${id}`);

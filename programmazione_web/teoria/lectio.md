@@ -1056,4 +1056,57 @@ Qualsiasi API ha sempre un template del genere: header, varie opzioni, messaggi 
 recupero parametri, 
 
 
-preparare form, con from e to, che 
+
+
+# Lezione 14
+
+Fino ad ora noi abbiamo usato solo la get che riprendiamo:ha due parametri, uri ed una funzione, la quale ha due parametri: req e res, rispettivamente parametri di ingresso e parametri di uscita; per i parametri di ingresso noi accediamo con req.getparams oppure req.query, in base al fatto se noi staimo cercando i parametri da placeholder o uri.
+
+Generalmente l'id degli elementi di un database non sono del tipo stringa, ma di tipo ObjectId.
+
+##### Esempio:
+
+```
+app.get('/movies/:id', async(req, res) => {
+
+  const id = req.params:id;
+  ...
+  const cursor = coll.find(new ObjectId(id));
+})
+```
+
+Se gli passo un film quindi dovrebbe darmi indietro i dati di quel film, come si passa un film? Ovviamente tramite id. Ecco il pezzo che mancava, fondamentale per il progetto obv.
+
+# Interazione con il database
+
+## Creazione utente
+
+Per creare l'utente chiaramente non bisogna usare un metodo get, come prima cosa bisogna usare l'api, si usa il metodo `post`, crea nuoto utente nell'architettura post, crea e genera il nuovo id.
+
+L'API deve: prendere i parametri dell'utente, *non* passati tramite url o placeholder, bensì tramite *body*. Nella fetch non si mette solo il link, ma si specifica anche il metodo, infatti se non specificato sarà una get, ma in questo caso obv non va bene.
+
+Nel nostro metodo, per la creazione dell'utente per la nostra logica possiamo scegliere i campi che vogliamo noi, e possiamo aggiungere dei controlli per i valoir inseriti, è così che ci sono i vari controlli sulla password ad esempio.
+
+
+* dichiarazione di dati necessari per la richiesta;
+* logica di controllo dei dati;
+* connessione al database;
+* creazione della struttura dati javascript;
+* inserimento della struttura nel database tramite il metodo *insert*
+* gestione delle eccezioni (mettendo il corpo principale in un blocco try, il resto in blocco catch(error));
+
+Si noti che in questo caso va bene ripetere tutti sti controlli, perchè tecnicamente frontend e backend sono completamente separati.
+
+Per la gestione degli errori principale:
+
+```
+if(error.code == 11000) {
+  res.status(409).json({success: false, message: "email già in uso"});
+} else {
+  res.status(500).json({success: false, message: "errore non definito"});
+}
+```
+
+Di standard una richiesta psot con fetch ha specifica del metodo, headers e body.
+
+Bisogna fare un po' di modifiche durante la lezione: aggiungere il metodo delete, get e put(questo aggiorna i dati);

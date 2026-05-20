@@ -27,14 +27,13 @@
 
         function cancella() {
 
-            const cancel = document.getElementById('idd');
+            const cancel = document.getElementById('idd').value;
 
             const options = {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(cancel)
+                }
             };
 
             fetch(`http://localhost:3001/user/${cancel}`, options)
